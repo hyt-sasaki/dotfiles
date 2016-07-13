@@ -864,7 +864,7 @@ NeoBundle 'Shougo/vimproc', {
            "" .bibファイルのコンパイルプログラムを指定
            let g:Tex_BibtexFlavor = 'upbibtex'
            "" .dviファイルのビュープログラムを指定 環境に合わせてパスを設定すること
-           let g:Tex_ViewRule_dvi = 'apvlv'
+           let g:Tex_ViewRule_dvi = 'xdvi -expert'
            "" pdfファイル生成のための依存関係を記述
            "" 以下の設定の場合、ターゲットにpdfを指定して\llでコンパイルすると、
            "" まず.dviファイルが作られ、次にそれをもとに.pdfファイルが作られる
@@ -872,7 +872,7 @@ NeoBundle 'Shougo/vimproc', {
            "" .dviファイルのコンパイルプログラムを指定
            let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
            "" .pdfファイルのビュープログラムを指定 環境に合わせてパスを設定すること
-           let g:Tex_ViewRule_pdf = 'apvlv'
+           let g:Tex_ViewRule_pdf = 'okular'
        endfunction
 
        nnoremap <Leader>lp :TTarget pdf<CR>
