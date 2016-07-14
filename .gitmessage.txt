@@ -1,0 +1,18 @@
+# If this commit is applied, it will...
+# --- commit type list ---
+#   [fix]: バグ修正
+#   [hotfix]: クリティカルなバグ修正
+#   [add]: 新規(ファイル)機能追加
+#   [modify]: 機能修正(バグではない)
+#   [change]: 仕様変更
+#   [clean]: 整理(リファクタリング等)
+#   [disable]: 無効化(コメントアウト等)
+#   [remove]: 削除(ファイル)
+#   [upgrade]: バージョンアップ
+#   [revert]: 変更取り消し
+[TYPE] SUMMARY
+
+# Why was this chane made?
+REASON
+
+# Any references to tickets, articles etc.?
