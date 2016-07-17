@@ -105,6 +105,10 @@ bindkey "^N" menu-complete
 #bindkey "^N" history-beginning-search-forward-end
 bindkey "^R" history-incremental-search-backward
 
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
 function percol_select_history() {
     local tac
     if which tac > /dev/null; then
@@ -115,5 +119,19 @@ function percol_select_history() {
     CURSOR=$#BUFFER # move cursor
     zle -R -c # refresh
 }
-zle -N percol_select_history
-bindkey '^R' percol_select_history
+
+peco-select-history() {
+    #BUFFER=$(history | sort -k1,1nr | perl -ne 'BEGIN { my @lines = (); } s/^\s*\d+\*?\s*//; $in=$_; if (!(grep {$in eq $_} @lines)) { push(@lines, $in); print $in; }' | peco --query "$LBUFFER")
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else tac="tail -r"
+    fi
+    BUFFER=$(fc -l -n 1 | eval $tac | peco --query "$LBUFFER")
+    CURSOR=${#BUFFER}
+    zle reset-prompt
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+# zle -N percol_select_history
+# bindkey '^R' percol_select_history
