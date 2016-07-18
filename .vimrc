@@ -887,7 +887,19 @@ NeoBundle 'Shougo/vimproc', {
        nmap s <Plug>(easymotion-s)
        vmap s <Plug>(easymotion-s)
        omap z <Plug>(easymotion-s)
+
+       call neobundle#untap()
+   endif
+
+   " --- VimFilerの設定 ---
+   if neobundle#tap('vimfiler.vim')
        nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit<Cr>
+       function! neobundle#tapped.hooks.on_source(bundle)
+           call vimfiler#custom#profile('default', 'context', {
+               \ 'safe' : 0,
+               \ 'edit_action' : 'tabopen',
+               \ })
+       endfunction
 
        call neobundle#untap()
    endif
