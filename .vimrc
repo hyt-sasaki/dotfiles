@@ -534,7 +534,7 @@ NeoBundle 'Shougo/vimproc', {
            let g:syntastic_java_javac_config_file = "$HOME/.syntastic_javac_config"
            " Python
            let g:syntastic_python_checkers = ['flake8']
-           let g:syntastic_python_flake8_args='--ignore=E265'
+           let g:syntastic_python_flake8_args='--ignore=E265,E266'
        endfunction
 
        call neobundle#untap()
