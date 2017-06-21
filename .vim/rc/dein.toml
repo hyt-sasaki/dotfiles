@@ -27,7 +27,7 @@ hook_add = '''
     nmap <Space> [unite]
 
     "スペースキーとcキーでカレントディレクトリを表示
-    nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+    nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -default-action=tabopen-buffer-name=files file<CR>
     "スペースキーとfキーでバッファと最近開いたファイル一覧を表示
     nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer file_mru -default-action=tabopen<CR>
     "スペースキーとdキーで最近開いたディレクトリを表示
