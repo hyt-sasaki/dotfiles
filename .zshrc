@@ -67,3 +67,4 @@ export LS_COLORS='no=00;38;5;250:rs=0:di=01;38;5;198:ln=01;38;5;37:mh=00:pi=48;5
 
 alias ls="ls --color=auto"
 alias gls="gls --color"
+zstyle ':completion:*' list-colors 'di=01;38;5;198' 'ln=01;38;5;37' 'so=48;5;230;38;5;136;01' 'ex=01;38;5;82' 'bd=48;5;230;38;5;224;01' 'cd=48;5;230;38;5;244;01'
