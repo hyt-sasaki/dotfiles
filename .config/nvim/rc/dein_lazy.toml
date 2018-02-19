@@ -56,7 +56,7 @@ hook_source = '''
 '''
 
 [[plugins]]
-repo = 'Shougo/neosnippet.vim'
+repo = 'Shougo/neosnippet'
 depends = ['neosnippet-snippets', 'context_filetype.vim']
 on_event = 'InsertCharPre'
 on_ft = 'snippet'
@@ -67,7 +67,8 @@ hook_source = '''
     let g:neosnippet#enable_snipmate_compatibility = 1
     let g:neosnippet#enable_completed_snippet = 1
     let g:neosnippet#expand_word_boundary = 1
-    let g:neosnippet#snippets_directory = '~/.vim/snippets'
+    "let g:neosnippet#snippets_directory = '~/.vim/snippets'
+    "let g:neosnippet#snippets_directory = '~/.cache/nvim/dein/repos/github.com/Shougo/neosnippet-snippets/neosnippets'
 '''
 
 [[plugins]]
@@ -165,24 +166,6 @@ hook_source = '''
 '''
 
 [[plugins]]
-repo = 'Shougo/vimfiler.vim'
-depends = 'unite.vim'
-on_map = {n = '<Plug>'}
-on_if = "isdirectory(bufname('%'))"
-hook_add = '''
-    nnoremap <silent> <leader>e :<C-u>VimFilerExplorer -split -winwidth=30 -find -no-quit<Cr>
-'''
-hook_source = '''
-    call vimfiler#custom#profile('default', 'context', {
-       \ 'safe' : 0,
-       \ 'auto_expand' : 1,
-       \ 'parent' : 0,
-       \ 'edit_action' : 'tabopen',
-       \ })
-'''
-
-
-[[plugins]]
 repo = 'kana/vim-submode'
 on_event = 'VimEnter'
 hook_source = '''
@@ -204,4 +187,57 @@ hook_source = '''
     call submode#enter_with('changetab', 'n', '', 'gT', 'gT')
     call submode#map('changetab', 'n', '', 't', 'gt')
     call submode#map('changetab', 'n', '', 'T', 'gT')
+'''
+
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+on_event = 'VimEnter'
+hook_add = '''
+    nnoremap <silent> <leader>e :<C-u>NERDTree<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_event = 'VimEnter'
+hook_source = '''
+    call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>')
+    call denite#custom#map('insert', "<C-p>", '<denite:move_to_previous_line>')
+
+    " tabopen や vsplit のキーバインドを割り当て
+    call denite#custom#map('insert', "<C-t>", '<denite:do_action:tabopen>')
+    call denite#custom#map('insert', "<C-v>", '<denite:do_action:vsplit>')
+    call denite#custom#map('normal', "v", '<denite:do_action:vsplit>')
+'''
+hook_add = '''
+    "prefix keyの設定
+    nmap <Space> [denite]
+
+    "スペースキーとcキーでカレントディレクトリを表示
+    nnoremap <silent> [denite]c :<C-u>DeniteBufferDir -buffer-name=files file<CR>
+    "スペースキーとfキーでバッファと最近開いたファイル一覧を表示
+    nnoremap <silent> [denite]f :<C-u>Denite<Space>buffer file_mru -default-action=tabopen<CR>
+    "スペースキーとdキーで最近開いたディレクトリを表示
+    nnoremap <silent> [denite]d :<C-u>Denite<Space>directory_mru<CR>
+    "スペースキーとbキーでバッファを表示
+    nnoremap <silent> [denite]b :<C-u>Denite<Space>buffer<CR>
+    "スペースキーとrキーでレジストリを表示
+    nnoremap <silent> [denite]r :<C-u>Denite<Space>register<CR>
+    "スペースキーとtキーでタブを表示
+    nnoremap <silent> [denite]t :<C-u>Denite<Space>tab<CR>
+    "スペースキーとhキーでヒストリ/ヤンクを表示
+    nnoremap <silent> [denite]h :<C-u>Denite<Space>neoyank<CR>
+    "スペースキーとoキーでoutline
+    nnoremap <silent> [denite]o :<C-u>silent! Denite<Space>outline<CR>
+    "スペースキーとENTERキーでfile_rec:!
+    nnoremap <silent> [denite]<CR> :<C-u>Denite<Space>file_rec:!<CR>
+    "denite.vimを開いている間のキーマッピング
+    "autocmd FileType denite call s:denite_my_settings()
+    "function! s:denite_my_settings()"{{{
+    "    " ESCでdeniteを終了
+    "    nmap <buffer> <ESC> <Plug>(denite_exit)
+    "endfunction"}}}
+    " set number
+    autocmd FileType denite setlocal number
+    autocmd BufWinEnter,BufEnter * setlocal number
 '''
