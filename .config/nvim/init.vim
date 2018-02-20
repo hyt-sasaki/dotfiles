@@ -10,7 +10,9 @@ function! s:source_rc(path, ...) abort "{{{
   let use_global = get(a:000, 0, !has('vim_starting'))
   let abspath = resolve(expand('~/.config/nvim/rc/' . a:path))
   if !use_global
-    execute 'source' fnameescape(abspath)
+    if filereadable(abspath)
+        execute 'source' fnameescape(abspath)
+    endif
     return
   endif
 
@@ -85,6 +87,8 @@ if !has('vim_starting')
   filetype plugin indent on
 endif
 call s:source_rc('options.rc.vim')
+" 各マシン固有の設定
+call s:source_rc('local.rc.vim')
 
 " colorschemeの設定
 colorscheme jellybeans
