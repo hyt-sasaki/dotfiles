@@ -86,3 +86,4 @@ case ${OSTYPE} in
 esac
 alias ll="ls -l"
 alias la="ls -a"
+setopt correct
