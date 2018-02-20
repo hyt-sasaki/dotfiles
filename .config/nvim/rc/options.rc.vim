@@ -90,10 +90,6 @@ noremap <CR> o<Esc>
 "挿入モードから抜ける際にIMEをオフ
 inoremap <ESC> <ESC>:set iminsert=0<CR>  " ESCでIMEを確実にOFF
 
-"行の折り返しをしている時に見た目の次の行へ移動する
-nnoremap j gj
-nnoremap k gk
-
 "gFでカーソル下のファイルを新しいタブで開く
 nnoremap gF <C-w>gf
 

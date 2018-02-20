@@ -241,3 +241,50 @@ hook_add = '''
     autocmd FileType denite setlocal number
     autocmd BufWinEnter,BufEnter * setlocal number
 '''
+
+
+[[plugins]]
+repo = 'vim-latex/vim-latex'
+on_ft = ['tex', 'latex', 'plaintex']
+hook_source = '''
+    set grepprg=grep\ -nH\ $*
+    set shellslash
+    let g:Imap_UsePlaceHolders = 1
+    let g:Imap_DeleteEmptyPlaceHolders = 1
+    let g:Imap_StickyPlaceHolders = 0
+    let g:Tex_DefaultTargetFormat = 'pdf'
+    let g:Tex_MultipleCompileFormats='dvi,pdf'
+    let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+    let g:Tex_CompileRule_dvi = 'platex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+    let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
+    let g:Tex_BibtexFlavor = 'pbibtex'
+    let g:Tex_UseEditorSettingInDVIViewer = 1
+    if has("mac")
+        let g:Tex_ViewRule_pdf = 'Skim'
+    elseif has("unix")
+        let g:Tex_ViewRule_dvi = 'xdvi -expert'
+        let g:Tex_ViewRule_pdf = 'Okular'
+    endif
+'''
+
+
+[[plugins]]
+repo = 'cohama/lexima.vim'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+on_event = 'VimEnter'
+hook_add = '''
+    nmap <Leader>g <Plug>(openbrowser-smart-search)
+    vmap <Leader>g <Plug>(openbrowser-smart-search)
+'''
+
+[[plugins]]
+repo = 'rhysd/accelerated-jk'
+on_event = 'VimEnter'
+hook_add = '''
+    " j/kによる移動を速くする
+    nmap j <Plug>(accelerated_jk_gj)
+    nmap k <Plug>(accelerated_jk_gk)
+'''
