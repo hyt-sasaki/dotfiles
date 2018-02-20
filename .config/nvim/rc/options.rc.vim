@@ -225,6 +225,7 @@ augroup highlight_setting
 augroup END
 syntax on
 
+set inccommand=split
 "-------------------------------------------------
 " ユーザ定義関数
 "-------------------------------------------------
