@@ -111,7 +111,11 @@ hook_source = '''
 repo = 'kannokanno/previm'
 on_ft = 'markdown'
 hook_add = '''
-    let g:previm_open_cmd = 'open -a Firefox'
+    if has("mac")
+        let g:previm_open_cmd = 'open -a Firefox'
+    elseif has("unix")
+        let g:previm_open_cmd = 'firefox'
+    endif
     " markdownのプレビュー
     augroup markdown_preview
         autocmd!
