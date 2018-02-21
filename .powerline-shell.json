@@ -9,10 +9,10 @@
     "hg",
     "jobs",
     "newline",
+    "time",
     "root"
   ],
   "cwd": {
-    "mode": "plain",
     "max_depth": 4
   }
 }
