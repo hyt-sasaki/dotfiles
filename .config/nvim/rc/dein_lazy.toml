@@ -324,3 +324,7 @@ hook_source = '''
 hook_add = '''
     nnoremap <silent> <leader>t :<C-u>10Term<CR>
 '''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
