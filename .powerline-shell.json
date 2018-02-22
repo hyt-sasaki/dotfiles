@@ -6,7 +6,6 @@
     "ssh",
     "cwd",
     "git",
-    "hg",
     "jobs",
     "newline",
     "time",
