@@ -1,2 +1,3 @@
 tags.lock
 .config/nvim/rc/local.rc.vim
+.zshrc.local
