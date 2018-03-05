@@ -88,7 +88,7 @@ esac
 alias ll="ls -l"
 alias la="ls -a"
 setopt correct
-if [ ! -x "`which pyenv`" ]; then
+if [ -x "`which pyenv`" ]; then
     export PATH="$HOME/.pyenv/bin:$PATH"
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
