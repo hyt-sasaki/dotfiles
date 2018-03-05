@@ -27,7 +27,16 @@ peco-select-history() {
     zle reset-prompt
 }
 zle -N peco-select-history
-bindkey '^r' peco-select-history
+if [ -x "`which peco`" ]; then
+    bindkey '^r' peco-select-history
+else
+    PECO_VERSION="v0.5.2"
+    wget "https://github.com/peco/peco/releases/download/${PECO_VERSION}/peco_linux_amd64.tar.gz"
+    tar -zxvf peco_linux_amd64.tar.gz
+    mv peco_linux_amd64/peco /usr/local/bin
+    rm -r peco_linux_amd64
+    rm peco_linux_amd64.tar.gz
+fi
 fpath=(/usr/local/share/zsh-completions $fpath)
 export PATH=$HOME/Library/Python/2.7/bin:$PATH
 function zle-line-init zle-keymap-select {
@@ -57,7 +66,22 @@ function install_powerline_precmd() {
 }
 
 if [ "$TERM" != "linux" ]; then
-    install_powerline_precmd
+    if [ ! -x "`which powerline-shell`" ]; then
+        if [ -x "`which pip`" ]; then
+            pip install --user powerline-shell
+            install_powerline_precmd
+        elif [ -x "`which pip2`" ]; then
+            pip2 install --user powerline-shell
+            install_powerline_precmd
+        elif [ -x "`which pip3`" ]; then
+            pip3 install --user powerline-shell
+            install_powerline_precmd
+        else
+            echo "pip is not installed."
+        fi
+    else
+        install_powerline_precmd
+    fi
 fi
 
 autoload -U compinit
