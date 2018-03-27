@@ -27,6 +27,29 @@ bindkey "^P" reverse-menu-complete
 bindkey "^N" menu-complete
 bindkey "^R" history-incremental-search-backward
 
+export PATH=$HOME/.local/bin:$PATH
+if [ ! -x "`which peco`" ]; then
+    case ${OSTYPE} in
+        darwin*)
+            brew install peco
+            ;;
+        linux*)
+            PECO_VERSION="v0.5.2"
+            NAME="peco_linux_amd64"
+            DIR="/tmp/${NAME}"
+            FILE="${DIR}.tar.gz"
+            curl -L -o $FILE "https://github.com/peco/peco/releases/download/${PECO_VERSION}/peco_linux_amd64.tar.gz"
+            tar -zxvf $FILE -C /tmp
+            if [ ! -e $HOME/.local/bin ]; then
+                mkdir -p $HOME/.local/bin
+            fi
+            chmod +x $DIR/peco
+            mv $DIR/peco $HOME/.local/bin
+            rm -r $DIR
+            rm $FILE
+            ;;
+    esac
+fi
 peco-select-history() {
     local tac
     if which tac > /dev/null; then
@@ -38,16 +61,7 @@ peco-select-history() {
     zle reset-prompt
 }
 zle -N peco-select-history
-if [ -x "`which peco`" ]; then
-    bindkey '^r' peco-select-history
-else
-    PECO_VERSION="v0.5.2"
-    wget "https://github.com/peco/peco/releases/download/${PECO_VERSION}/peco_linux_amd64.tar.gz"
-    tar -zxvf peco_linux_amd64.tar.gz
-    mv peco_linux_amd64/peco /usr/local/bin
-    rm -r peco_linux_amd64
-    rm peco_linux_amd64.tar.gz
-fi
+bindkey '^r' peco-select-history
 fpath=(/usr/local/share/zsh-completions $fpath)
 export PATH=$HOME/Library/Python/2.7/bin:$PATH
 function zle-line-init zle-keymap-select {
@@ -62,7 +76,6 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 # powerlineの設定
-export PATH=$HOME/.local/bin:$PATH
 function powerline_precmd() {
     PS1="$(powerline-shell --shell zsh $?)"
 }
