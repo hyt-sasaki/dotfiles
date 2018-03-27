@@ -127,6 +127,9 @@ export VISUAL="$VISUAL"
 export EDITOR="$VISUAL"
 case ${OSTYPE} in
     darwin*)
+        if [ ! -x "`which gls`" ]; then
+            brew install coreutils
+        fi
         alias ls="gls --color"
         ;;
     linux*)
