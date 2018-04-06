@@ -138,6 +138,8 @@ case ${OSTYPE} in
 esac
 alias ll="ls -l"
 alias la="ls -a"
+alias dps='docker ps --format "{{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Command}}\t{{.RunningFor}}"'
+alias de='docker exec -it `dps | peco | cut -f 1` /bin/bash'
 setopt correct
 if [ -x "`which pyenv`" ]; then
     export PATH="$HOME/.pyenv/bin:$PATH"
