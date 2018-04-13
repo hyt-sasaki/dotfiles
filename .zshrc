@@ -63,6 +63,18 @@ peco-select-history() {
 zle -N peco-select-history
 bindkey '^r' peco-select-history
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+autoload -Uz add-zsh-hock
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+if [ ! -e "$HOME/.zsh/anyframe" ]; then
+    mkdir -p $HOME/.zsh
+    git clone https://github.com/mollifier/anyframe.git $HOME/.zsh/anyframe
+fi
+fpath=($HOME/.zsh/anyframe(N-/) $fpath)
+autoload -Uz anyframe-init
+anyframe-init
+bindkey '^f' anyframe-widget-cdr
+
 export PATH=$HOME/Library/Python/2.7/bin:$PATH
 function zle-line-init zle-keymap-select {
     L_SEPARATOR=$'\uE0B0'
