@@ -86,6 +86,7 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
+setopt transient_rprompt
 
 # powerlineの設定
 function powerline_precmd() {
