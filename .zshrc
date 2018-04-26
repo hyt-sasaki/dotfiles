@@ -157,12 +157,9 @@ alias la="ls -a"
 alias dps='docker ps --format "{{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Command}}\t{{.RunningFor}}"'
 alias de='docker exec -it `dps | peco | cut -f 1` /bin/bash'
 setopt correct
-if [ ! -x "`which pyenv`" ]; then
+if [ -e "$HOME/.pyenv/bin" ]; then
     export PATH="$HOME/.pyenv/bin:$PATH"
-    if [ -x "`which pyenv`" ]; then
-        eval "$(pyenv init -)"
-        eval "$(pyenv virtualenv-init -)"
-    fi
+    eval "$(pyenv init -)"
 fi
 if [ -e "$HOME/.zshrc.local" ]; then
     source "$HOME/.zshrc.local"
