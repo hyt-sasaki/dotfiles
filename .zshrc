@@ -20,6 +20,7 @@ export HISTFILE=${HOME}/.zsh_history
 HISTSIZE=100000
 HISTTIMEFORMAT='%Y/%m/%d %H:%M:%s'
 setopt hist_ignore_dups
+setopt inc_append_history
 setopt share_history
 setopt hist_ignore_all_dups
 
