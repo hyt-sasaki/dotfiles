@@ -17,7 +17,8 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 # history設定 参照
 export HISTFILE=${HOME}/.zsh_history
-HISTSIZE=100000
+HISTSIZE=10000
+SAVEHIST=100000
 HISTTIMEFORMAT='%Y/%m/%d %H:%M:%s'
 setopt hist_ignore_dups
 setopt share_history
