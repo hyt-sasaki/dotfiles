@@ -23,6 +23,7 @@ HISTTIMEFORMAT='%Y/%m/%d %H:%M:%s'
 setopt hist_ignore_dups
 setopt share_history
 setopt hist_ignore_all_dups
+setopt hist_ignore_space
 
 setopt auto_pushd
 
