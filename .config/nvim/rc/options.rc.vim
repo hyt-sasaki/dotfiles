@@ -134,6 +134,8 @@ augroup python_indent
     autocmd BufRead,BufNewFile *.py setlocal nosmartindent
 augroup END
 
+let g:tex_flavor = "latex"
+
 " pudbの起動用キーマップ
 " pudbのインストールが必要
 augroup python_debugger
