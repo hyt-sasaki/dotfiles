@@ -1,6 +1,7 @@
 [[plugins]]
-repo = 'zchee/deoplete-jedi'
+repo = 'deoplete-plugins/deoplete-jedi'
 on_event = 'InsertEnter'
+depends = 'Shougo/deoplete.nvim'
 on_ft = 'python'
 
 [[plugins]]
