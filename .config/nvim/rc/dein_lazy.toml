@@ -342,9 +342,10 @@ hook_add = '''
 
 [[plugins]]
 repo = 'vimlab/split-term.vim'
-on_event = 'BufRead'
+on_event = 'VimEnter'
 hook_source = '''
     let g:disable_key_mappings = 1
+    let g:split_term_default_shell = "zsh"
     set splitbelow
 '''
 hook_add = '''
