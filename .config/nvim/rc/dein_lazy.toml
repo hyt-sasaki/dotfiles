@@ -101,7 +101,7 @@ hook_source = '''
                \ 'runner' : 'vimproc',
                \ }
     let g:quickrun_config['python'] = {
-               \ 'command': 'python',
+               \ 'command': 'python3',
                \ 'exec': '%c %o %s %a',
                \ 'hook/eval/template': 'print(%s)',
                \ 'hook/output_encode/encoding': 'utf-8',
