@@ -230,9 +230,10 @@ hook_add = '''
     nmap <Space> [denite]
 
     "スペースキーとcキーでカレントディレクトリを表示
-    nnoremap <silent> [denite]c :<C-u>DeniteBufferDir -buffer-name=files -default-action=tabopen file<CR>
+    "nnoremap <silent> [denite]c :<C-u>DeniteBufferDir -buffer-name=files file<CR>
+    nnoremap <silent> [denite]c :<C-u>Denite<SPACE>file/rec<CR>
     "スペースキーとfキーでバッファと最近開いたファイル一覧を表示
-    nnoremap <silent> [denite]f :<C-u>Denite<Space>buffer file_mru -default-action=tabopen -default-action=tabopen<CR>
+    nnoremap <silent> [denite]f :<C-u>Denite<Space>buffer file_mru <CR>
     "スペースキーとdキーで最近開いたディレクトリを表示
     nnoremap <silent> [denite]d :<C-u>Denite<Space>directory_mru<CR>
     "スペースキーとbキーでバッファを表示
