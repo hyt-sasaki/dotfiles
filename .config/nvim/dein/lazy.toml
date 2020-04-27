@@ -1,0 +1,207 @@
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+#depends = ['Shougo/deoplete-lsp', 'context_filetype.vim']
+on_event = 'InsertEnter'
+hook_source = '''
+let g:deoplete#enable_at_startup = 1
+source ~/.config/nvim/rc/plugins/deoplete.rc.vim
+'''
+
+[[plugins]]
+repo = 'Shougo/deoplete-lsp'
+on_event = 'InsertEnter'
+depends = ['deoplete.nvim', 'nvim-lsp']
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+depends = ['neosnippet-snippets', 'context_filetype.vim']
+on_event = 'InsertCharPre'
+on_ft = 'snippet'
+hook_source = '''
+    imap <silent><C-k>     <Plug>(neosnippet_jump_or_expand)
+    smap <silent><C-k>     <Plug>(neosnippet_jump_or_expand)
+    xmap <silent><C-k>     <Plug>(neosnippet_expand_target)
+    let g:neosnippet#enable_snipmate_compatibility = 1
+    let g:neosnippet#enable_completed_snippet = 1
+    let g:neosnippet#expand_word_boundary = 1
+    "let g:neosnippet#snippets_directory = '~/.vim/snippets'
+    "let g:neosnippet#snippets_directory = '~/.cache/nvim/dein/repos/github.com/Shougo/neosnippet-snippets/neosnippets'
+'''
+
+[[plugins]]
+repo = 'kana/vim-submode'
+on_event = ['WinLeave', 'VimResized']
+hook_source = '''
+    "各関数の最初の引数は、サブモードの名前
+    "第2引数はモードの種類。n = ノーマルモード、i = 挿入モードと言った感じで、ni のように複数同時に指定可能。
+    "第3引数は map のオプションで、b = <buffer> e = <expr> と言った具合。
+    "第4引数と第5引数が map の {lhs} と {rhs}
+    " ウィンドウサイズの変更キーを簡易化
+    call submode#enter_with('winsize', 'n', '', '<C-w>>', '<C-w>>')
+    call submode#enter_with('winsize', 'n', '', '<C-w><', '<C-w><')
+    call submode#enter_with('winsize', 'n', '', '<C-w>+', '<C-w>-')
+    call submode#enter_with('winsize', 'n', '', '<C-w>-', '<C-w>+')
+    call submode#map('winsize', 'n', '', '>', '<C-w>>')
+    call submode#map('winsize', 'n', '', '<', '<C-w><')
+    call submode#map('winsize', 'n', '', '+', '<C-w>-')
+    call submode#map('winsize', 'n', '', '-', '<C-w>+')
+    " タブページの切り替えキーを簡略化
+    call submode#enter_with('changetab', 'n', '', 'gt', 'gt')
+    call submode#enter_with('changetab', 'n', '', 'gT', 'gT')
+    call submode#map('changetab', 'n', '', 't', 'gt')
+    call submode#map('changetab', 'n', '', 'T', 'gT')
+'''
+
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+on_cmd = 'NERDTree'
+hook_add = '''
+    nnoremap <silent> <leader>e :<C-u>NERDTree<CR>
+'''
+
+[[plugins]]
+repo = 'ivalkeen/nerdtree-execute'
+on_cmd = 'NERDTree'
+
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+on_cmd = 'NERDTree'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_event = 'BufRead'
+hook_post_source = '''
+    call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>')
+    call denite#custom#map('insert', "<C-p>", '<denite:move_to_previous_line>')
+
+    " tabopen や vsplit のキーバインドを割り当て
+    call denite#custom#map('insert', "<C-t>", '<denite:do_action:tabopen>')
+    call denite#custom#map('insert', "<C-v>", '<denite:do_action:vsplit>')
+    call denite#custom#map('normal', "v", '<denite:do_action:vsplit>')
+'''
+hook_add = '''
+    "prefix keyの設定
+    nmap <Space> [denite]
+
+    "スペースキーとcキーでカレントディレクトリを表示
+    "nnoremap <silent> [denite]c :<C-u>DeniteBufferDir -buffer-name=files file<CR>
+    nnoremap <silent> [denite]c :<C-u>Denite<SPACE>file/rec<CR>
+    "スペースキーとfキーでバッファと最近開いたファイル一覧を表示
+    nnoremap <silent> [denite]f :<C-u>Denite<Space>buffer file_mru <CR>
+    "スペースキーとdキーで最近開いたディレクトリを表示
+    nnoremap <silent> [denite]d :<C-u>Denite<Space>directory_mru<CR>
+    "スペースキーとbキーでバッファを表示
+    nnoremap <silent> [denite]b :<C-u>Denite<Space>buffer<CR>
+    "スペースキーとnキーでカーソル下の単語を検索
+    nnoremap <silent> [denite]n :<C-u>DeniteCursorWord<Space>grep -smartcase<CR>
+    "スペースキーとNキーでカーソル下の単語を検索しタブで開く
+    nnoremap <silent> [denite]N :<C-u>DeniteCursorWord<Space>grep -smartcase -default-action=tabopen<CR>
+    "スペースキーとrキーでレジストリを表示
+    nnoremap <silent> [denite]r :<C-u>Denite<Space>register<CR>
+    "スペースキーとtキーでタブを表示
+    nnoremap <silent> [denite]t :<C-u>Denite<Space>tab<CR>
+    "スペースキーとhキーでヒストリ/ヤンクを表示
+    nnoremap <silent> [denite]h :<C-u>Denite<Space>neoyank<CR>
+    "スペースキーとoキーでoutline
+    nnoremap <silent> [denite]o :<C-u>silent! Denite<Space>outline<CR>
+    "スペースキーとENTERキーでfile_rec:!
+    nnoremap <silent> [denite]<CR> :<C-u>Denite<Space>file_rec:!<CR>
+    "denite.vimを開いている間のキーマッピング
+    "autocmd FileType denite call s:denite_my_settings()
+    "function! s:denite_my_settings()"{{{
+    "    " ESCでdeniteを終了
+    "    nmap <buffer> <ESC> <Plug>(denite_exit)
+    "endfunction"}}}
+    " set number
+
+    autocmd FileType denite call s:denite_my_settings()
+
+    function! s:denite_my_settings() abort
+      nnoremap <silent><buffer><expr> <CR>
+      \ denite#do_map('do_action')
+      nnoremap <silent><buffer><expr> d
+      \ denite#do_map('do_action', 'delete')
+      nnoremap <silent><buffer><expr> p
+      \ denite#do_map('do_action', 'preview')
+      nnoremap <silent><buffer><expr> q
+      \ denite#do_map('quit')
+      nnoremap <silent><buffer><expr> i
+      \ denite#do_map('open_filter_buffer')
+      nnoremap <silent><buffer><expr> <Space>
+      \ denite#do_map('toggle_select').'j'
+    endfunction
+
+    autocmd FileType denite setlocal number
+    autocmd BufWinEnter,BufEnter * setlocal number
+'''
+
+[[plugins]]
+repo = 'cohama/lexima.vim'
+on_event = 'InsertEnter'
+
+[[plugins]]
+repo = 'rhysd/accelerated-jk'
+on_event = 'CursorMoved'
+hook_add = '''
+    " j/kによる移動を速くする
+    nmap j <Plug>(accelerated_jk_gj)
+    nmap k <Plug>(accelerated_jk_gk)
+'''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]
+repo = 'cohama/agit.vim'
+on_cmd = 'Agit'
+
+[[plugins]]
+repo = 'sjl/gundo.vim'
+on_cmd = 'GundoToggle'
+hook_add = '''
+    let g:gundo_right = 1
+    nnoremap U :<C-u>GundoToggle<CR><C-w>p
+    nnoremap <silent> <F5> :<C-u>silent! GundoRenderGraph<CR><C-w>p
+'''
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_event = 'VimEnter'
+on_source = 'Shougo/denite.nvim'
+
+[[plugins]]
+repo = 'Lokaltog/vim-easymotion'
+on_map = '<Plug>'
+hook_add = '''
+    let g:EasyMotion_use_migemo = 1
+    " cmigemoのインストールが必要
+    nmap s <Plug>(easymotion-s)
+    vmap s <Plug>(easymotion-s)
+    omap z <Plug>(easymotion-s)
+'''
+
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+on_event = 'VimEnter'
+on_source = 'Shougo/denite.nvim'
+
+[[plugins]]
+repo = 'bkad/CamelCaseMotion'
+on_event = 'VimEnter'
+hook_add = '''
+    map <silent> w <Plug>CamelCaseMotion_w
+    map <silent> b <Plug>CamelCaseMotion_b
+    map <silent> e <Plug>CamelCaseMotion_e
+    map <silent> ge <Plug>CamelCaseMotion_ge
+    sunmap w
+    sunmap b
+    sunmap e
+    sunmap ge
+'''
+
+[[plugins]]
+repo = 'lambdalisue/vim-pyenv'
+on_ft = 'python'
+depends = ['deoplete.nvim', 'nvim-lsp']

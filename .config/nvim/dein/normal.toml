@@ -1,0 +1,124 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'neovim/nvim-lsp'
+#depends = ['Shougo/deoplete-lsp']
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'nanotech/jellybeans.vim'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+    let g:lightline = {
+         \ 'colorscheme': 'landscape',
+         \ 'active': {
+         \   'left': [ [ 'mode', 'paste' ],
+         \             [ 'fugitive', 'filename' ] ],
+         \   'right': [ [ 'syntastic', 'lineinfo' ],
+         \              ['percent'],
+         \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+         \ },
+         \ 'component_function': {
+         \   'fugitive': 'LightLineFugitive',
+         \   'readonly': 'LightLineReadonly',
+         \   'modified': 'LightLineModified',
+         \   'fileformat': 'LightLineFileformat',
+         \   'filetype': 'LightLineFiletype',
+         \   'fileencoding': 'LightLineFileencoding',
+         \   'mode': 'LightLineMode',
+         \   'filename': 'LightLineFilename'
+         \ },
+         \ 'component_expand': {
+         \   'syntastic': 'SyntasticStatuslineFlag',
+         \ },
+         \ 'component_type': {
+         \   'syntastic': 'error',
+         \ },
+         \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+         \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+         \ }
+
+    function! LightLineModified()
+     if &filetype == "help"
+       return ""
+     elseif &modified
+       return "+"
+     elseif &modifiable
+       return ""
+     else
+       return ""
+     endif
+    endfunction
+
+    function! LightLineReadonly()
+     if &filetype == "help"
+       return ""
+     elseif &readonly
+       return "⭤"
+     else
+       return ""
+     endif
+    endfunction
+
+    function! LightLineFilename()
+     return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+          \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+          \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+    endfunction
+
+    function! LightLineFugitive()
+     if exists("*fugitive#head")
+       let _ = fugitive#head()
+       return strlen(_) ? "\ue0a0 "._ : ''
+     endif
+     return ''
+    endfunction
+
+    function! LightLineFileformat()
+     return winwidth(0) > 70 ? &fileformat : ''
+    endfunction
+
+    function! LightLineFiletype()
+     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+    endfunction
+
+    function! LightLineFileencoding()
+     return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+    endfunction
+
+    function! LightLineMode()
+     let fname = expand('%:t')
+     return  fname == '__Gundo__' ? 'Gundo' :
+           \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+           \ &ft == 'unite' ? 'Unite' :
+           \ &ft == 'vimshell' ? 'VimShell' :
+           \ winwidth(0) > 60 ? lightline#mode() : ''
+    endfunction
+
+    let g:tagbar_status_func = 'TagbarStatusFunc'
+
+    function! TagbarStatusFunc(current, sort, fname, ...) abort
+       let g:lightline.fname = a:fname
+     return lightline#statusline(0)
+    endfunction
+
+    let g:unite_force_overwrite_statusline = 0
+    let g:vimshell_force_overwrite_statusline = 0
+'''
+
+[[plugins]]
+repo = 'rhysd/clever-f.vim'
+hook_add = '''
+    " 大文字を入力した時のみ大文字小文字を区別
+    let g:clever_f_smart_case = 1
+    " ローマ字入力で日本語も検索
+    let g:clever_f_use_migemo = 1
+'''
