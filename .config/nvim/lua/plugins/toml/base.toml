@@ -1,0 +1,26 @@
+# base
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# lsp
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+
+[[plugins]]
+repo = 'williamboman/nvim-lsp-installer'
+
+
+# functionality
+[[plugins]]
+repo = 'rhysd/clever-f.vim'
+
+# theme
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+    let g:lightline = {'colorscheme': 'wombat'}
+'''
+
+[[plugins]]
+repo = 'nanotech/jellybeans.vim'
+
