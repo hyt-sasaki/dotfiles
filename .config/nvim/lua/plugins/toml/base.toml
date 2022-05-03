@@ -9,6 +9,30 @@ repo = 'neovim/nvim-lspconfig'
 [[plugins]]
 repo = 'williamboman/nvim-lsp-installer'
 
+# completion
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-around'
+
+[[plugins]]
+repo = 'Shougo/ddc-nextword'
+
+[[plugins]]
+repo = 'Shougo/ddc-matcher_head'
+
+[[plugins]]
+repo = 'Shougo/ddc-sorter_rank'
+
+[[plugins]]
+repo = 'Shougo/ddc-nvim-lsp'
+
+[[plugins]]
+repo = 'LumaKernel/ddc-tabnine'
 
 # functionality
 [[plugins]]
