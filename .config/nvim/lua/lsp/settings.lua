@@ -32,6 +32,7 @@ local on_attach = function(_, bufnr)
     vim.api.nvim_create_autocmd('BufWritePre', {
         callback = function() return vim.lsp.buf.format() end
     })
+    require 'fidget'.setup({})
 end
 
 local servers = require('nvim-lsp-installer.servers')

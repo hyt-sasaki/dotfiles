@@ -1,35 +1,43 @@
--- 自動で dein#recache_runtimepath() する
-vim.api.nvim_set_var('dein#auto_recache', 1)
+local repositories = {
+    'Shougo/dein.vim',
+    'neovim/nvim-lspconfig',
+    'williamboman/nvim-lsp-installer',
+    'Shougo/ddc.vim',
+    'vim-denops/denops.vim',
+    'Shougo/ddc-around',
+    'Shougo/ddc-matcher_head',
+    'Shougo/ddc-sorter_rank',
+    'Shougo/ddc-nvim-lsp',
+    'LumaKernel/ddc-tabnine',
+    'Shougo/ddu.vim',
+    'Shougo/ddu-ui-ff',
+    'Shougo/ddu-source-file_rec',
+    'Shougo/ddu-source-buffer',
+    'Shougo/ddu-source-line',
+    'kuuote/ddu-source-mr',
+    'matsui54/ddu-source-command_history',
+    'shun/ddu-source-rg',
+    'Shougo/ddu-filter-matcher_substring',
+    'Shougo/ddu-kind-file',
+    'rhysd/clever-f.vim',
+    'lambdalisue/mr.vim',
+    'Shougo/pum.vim',
+    'matsui54/denops-popup-preview.vim',
+    'matsui54/denops-signature_help',
+    'itchyny/lightline.vim',
+    'nanotech/jellybeans.vim',
+    'j-hui/fidget.nvim',
+}
 
--- neovimのリモートプラグインを遅延読み込み
-vim.api.nvim_set_var('dein#lazy_rplugins', 1)
-vim.api.nvim_set_var('dein#enable_notification', 1)
-vim.api.nvim_set_var('dein#install_max_processes', 16)
-vim.api.nvim_set_var('dein#install_message_type', 'none')
-vim.api.nvim_set_var('dein#enable_notification', 1)
-
-local dein_dir = vim.env.HOME .. '/.cache/dein'
-local dein_repo_dir = dein_dir .. '/repos/github.com/Shougo/dein.vim'
-
-if not string.match(vim.o.runtimepath, '/dein.vim') then
-	if vim.fn.isdirectory(dein_repo_dir) ~= 1 then
-		os.execute('git clone https://github.com/Shougo/dein.vim '..dein_repo_dir)
-	end
-	vim.o.runtimepath = dein_repo_dir .. ',' .. vim.o.runtimepath
+for _, repo in pairs(repositories) do
+    vim.fn['dein#add'](repo)
 end
 
-if vim.call('dein#load_state', dein_dir) == 1 then
-	local dein_toml_dir = vim.env.HOME .. '/.config/nvim/lua/plugins/toml'
-	local dein_toml = dein_toml_dir .. '/base.toml'
-	local dein_toml_lazy = dein_toml_dir .. '/lazy.toml'
+-- denops-signature_help
+vim.fn['signature_help#enable']()
+vim.api.nvim_set_var('lsp_signature_help_enabled', 0)
+-- denops-popup-preview
+vim.fn['popup_preview#enable']()
 
-	vim.call('dein#begin', dein_dir, {vim.fn.expand('<sfile>'), dein_toml, dein_toml_lazy, dein_toml_input})
-
-	vim.call('dein#load_toml', dein_toml, {lazy = 0})
-	vim.call('dein#load_toml', dein_toml_lazy, {lazy = 1})
-
-    vim.call('dein#install')
-
-	vim.call('dein#end')
-	vim.call('dein#save_state')
-end
+-- lightline
+vim.api.nvim_set_var('lightline', { colorscheme = 'wombat' })
