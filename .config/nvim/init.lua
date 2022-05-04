@@ -1,4 +1,5 @@
 require('plugins/main')
 require('lsp/main')
 require('completion/main')
+require('ui/main')
 require('options')

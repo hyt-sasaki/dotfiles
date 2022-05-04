@@ -11,17 +11,13 @@ local on_attach = function(_, bufnr)
         {type='n', key='gi', cmd_str=get_cmd_str('buf.implementation')},
         {type='n', key='gr', cmd_str=get_cmd_str('buf.references')},
         {type='n', key='<C-k>', cmd_str=get_cmd_str('buf.signature_help')},
-        {type='n', key='<space>D', cmd_str=get_cmd_str('buf.type_definition')},
         {type='n', key='<space>rn', cmd_str=get_cmd_str('buf.rename')},
-        {type='n', key='<space>ca', cmd_str=get_cmd_str('buf.code_action')},
+        {type='n', key='<a-cr>', cmd_str=get_cmd_str('buf.code_action')},
         {type='n', key='<space>e', cmd_str=get_cmd_str('diagnostic.show_line_diagnostics')},
         {type='n', key='[d', cmd_str=get_cmd_str('diagnostic.goto_prev')},
         {type='n', key=']d', cmd_str=get_cmd_str('diagnostic.goto_next')},
         {type='n', key='<space>q', cmd_str=get_cmd_str('diagnostic.set_loclist')},
-        {type='n', key='<space>f', cmd_str=get_cmd_str('buf.formatting')},
-        {type='n', key='<space>wa', cmd_str=get_cmd_str('buf.add_workspace_folder')},
-        {type='n', key='<space>wr', cmd_str=get_cmd_str('buf.remove_workspace_folder')},
-        {type='n', key='<space>wl', cmd_str='<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'}
+        {type='n', key='<space>F', cmd_str=get_cmd_str('buf.format')},
     }
 
     for _, keymap in pairs(keymaps) do
