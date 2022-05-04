@@ -34,19 +34,26 @@ repo = 'Shougo/ddc-nvim-lsp'
 [[plugins]]
 repo = 'LumaKernel/ddc-tabnine'
 
-# ui
+# ddu
 [[plugins]]
 repo = 'Shougo/ddu.vim'
 
+# ddu-ui
 [[plugins]]
 repo = 'Shougo/ddu-ui-ff'
 
+# ddu-source
 [[plugins]]
 repo = 'Shougo/ddu-source-file_rec'
 
 [[plugins]]
+repo = 'Shougo/ddu-source-buffer'
+
+# ddu-filter
+[[plugins]]
 repo = 'Shougo/ddu-filter-matcher_substring'
 
+# ddu-kind
 [[plugins]]
 repo = 'Shougo/ddu-kind-file'
 

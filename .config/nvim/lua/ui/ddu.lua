@@ -5,8 +5,9 @@ local keymap = vim.keymap
 call('ddu#custom#patch_global', {
     ui = 'ff',
     sources = { {
-        name = 'file_rec',
-        params = {}
+        name = 'file_rec'
+    }, {
+        name = 'buffer'
     } },
     sourceOptions = {
         ['_'] = {
@@ -27,8 +28,11 @@ call('ddu#custom#patch_global', {
 
 -- keymap
 keymap.set('n', '<Space>f', function()
-    vim.fn['ddu#start']({sources = {{ name = 'file_rec'}}})
-end, { noremap = true, silent = true, nowait = true})
+    vim.fn['ddu#start']({ sources = { { name = 'file_rec' } } })
+end, { noremap = true, silent = true, nowait = true })
+keymap.set('n', '<Space>b', function()
+    vim.fn['ddu#start']({ sources = { { name = 'buffer' } } })
+end, { noremap = true, silent = true, nowait = true })
 
 -- ddu-ff
 api.nvim_create_autocmd('FileType', {
@@ -42,8 +46,8 @@ api.nvim_create_autocmd('FileType', {
             { key = 'i', action = 'openFilterWindow' },
             { key = 'q', action = 'quit' },
         }
-        for _, keymap_setting in ipairs(keymap_settings) do
-            api.nvim_buf_set_keymap(0, 'n', keymap_setting['key'], create_cmd_name(keymap_setting['action']), { silent = true, noremap = true })
+        for _, keymap_setting in pairs(keymap_settings) do
+            api.nvim_buf_set_keymap(0, 'n', keymap_setting.key, create_cmd_name(keymap_setting.action), { silent = true, noremap = true })
         end
     end
 })
