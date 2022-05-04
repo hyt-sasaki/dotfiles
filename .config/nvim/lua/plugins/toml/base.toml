@@ -73,6 +73,30 @@ repo = 'rhysd/clever-f.vim'
 [[plugins]]
 repo = 'lambdalisue/mr.vim'
 
+[[plugins]]
+repo = 'Shougo/pum.vim'
+
+[[plugins]]
+repo = 'matsui54/denops-popup-preview.vim'
+hook_add = '''
+    call popup_preview#enable()
+'''
+
+[[plugins]]
+repo = 'matsui54/denops-signature_help'
+hook_add = '''
+    call signature_help#enable()
+    let g:lsp_signature_help_enabled = 0
+    let g:signature_help_config = {
+              \ 'border': v:true,
+              \ 'maxWidth': 80,
+              \ 'maxHeight': 30,
+              \ 'style': "full",
+              \ 'onTriggerChar': v:false,
+              \ 'multiLabel': v:false,
+              \ }
+'''
+
 # theme
 [[plugins]]
 repo = 'itchyny/lightline.vim'
