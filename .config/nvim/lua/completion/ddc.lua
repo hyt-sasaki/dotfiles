@@ -1,11 +1,8 @@
-vim.call('ddc#custom#patch_global', 'sources', {'around', 'nextword', 'nvim-lsp', 'tabnine'})
+vim.call('ddc#custom#patch_global', 'sources', {'around', 'nvim-lsp', 'tabnine'})
 
 vim.call('ddc#custom#patch_global', 'sourceOptions', {
     around = {
         mark = 'A',
-    },
-    nextword = {
-        mark = 'nextword',
     },
     tabnine = {
         mark = 'TN',

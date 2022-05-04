@@ -20,9 +20,6 @@ repo = 'vim-denops/denops.vim'
 repo = 'Shougo/ddc-around'
 
 [[plugins]]
-repo = 'Shougo/ddc-nextword'
-
-[[plugins]]
 repo = 'Shougo/ddc-matcher_head'
 
 [[plugins]]
