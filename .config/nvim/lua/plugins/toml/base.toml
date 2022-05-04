@@ -50,10 +50,16 @@ repo = 'Shougo/ddu-source-file_rec'
 repo = 'Shougo/ddu-source-buffer'
 
 [[plugins]]
+repo = 'Shougo/ddu-source-line'
+
+[[plugins]]
 repo = 'kuuote/ddu-source-mr'
 
 [[plugins]]
 repo = 'matsui54/ddu-source-command_history'
+
+[[plugins]]
+repo = 'shun/ddu-source-rg'
 
 # ddu-filter
 [[plugins]]

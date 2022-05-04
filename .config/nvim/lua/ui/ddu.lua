@@ -1,6 +1,7 @@
 local call = vim.call
 local api = vim.api
 local keymap = vim.keymap
+local fn = vim.fn
 
 call('ddu#custom#patch_global', {
     ui = 'ff',
@@ -8,6 +9,11 @@ call('ddu#custom#patch_global', {
         name = 'file_rec'
     }, {
         name = 'buffer'
+    }, {
+        name = 'rg',
+        params = {
+            args = { '--column', '--no-heading', '--color', 'never' }
+        }
     } },
     sourceOptions = {
         ['_'] = {
@@ -30,19 +36,26 @@ call('ddu#custom#patch_global', {
 })
 
 -- keymap
-keymap.set('n', '<Space>f', function()
-    vim.fn['ddu#start']({ sources = { { name = 'file_rec' } } })
-end, { noremap = true, silent = true, nowait = true })
-keymap.set('n', '<Space>b', function()
-    vim.fn['ddu#start']({ sources = { { name = 'buffer' } } })
-end, { noremap = true, silent = true, nowait = true })
-keymap.set('n', '<Space>r', function()
-    vim.fn['ddu#start']({ sources = { { name = 'mr' } } })
-end, { noremap = true, silent = true, nowait = true })
-keymap.set('n', '<Space>c', function()
-    vim.fn['ddu#start']({ sources = { { name = 'command_history' } } })
-end, { noremap = true, silent = true, nowait = true })
-
+local start_mappings = {
+    { key = '<Space>f', funcArgs = { sources = { { name = 'file_rec' } } } },
+    { key = '<Space>b', funcArgs = { sources = { { name = 'buffer' } } } },
+    { key = '<Space>r', funcArgs = { sources = { { name = 'mr' } } } },
+    { key = '<Space>l', funcArgs = { sources = { { name = 'line' } } } },
+    { key = '<Space>c', funcArgs = { sources = { { name = 'command_history' } } } },
+    { key = '<Space>g', funcArgs = {
+        volatile = true,
+        sources = { { name = 'rg', options = { matchers = {} } } },
+        uiParams = {
+            ignoreEmpty = false,
+            autoResize = false
+        }
+    } },
+}
+for _, mapping in pairs(start_mappings) do
+    keymap.set('n', mapping.key, function()
+        fn['ddu#start'](mapping.funcArgs)
+    end, { noremap = true, silent = true, nowait = true })
+end
 
 -- ddu-ff
 api.nvim_create_autocmd('FileType', {
