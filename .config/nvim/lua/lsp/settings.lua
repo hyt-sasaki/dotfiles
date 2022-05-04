@@ -26,10 +26,14 @@ local on_attach = function(_, bufnr)
 end
 
 local lsp_installer = require('nvim-lsp-installer')
-lsp_installer.on_server_ready(function(server)
-    print(server.name)
-    local opts = {}
-    opts.on_attach = on_attach
-    server:setup(opts)
-    vim.cmd([[ do User LspAttachBuffers ]])
-end)
+lsp_installer.setup {
+    ensure_installed = {'sumneko_lua', 'tsserver'},
+    automatic_installation = true
+}
+
+local servers = require('nvim-lsp-installer.servers')
+for _, lsp in pairs(servers.get_installed_servers()) do
+    require('lspconfig')[lsp.name].setup {
+        on_attach = on_attach
+    }
+end
