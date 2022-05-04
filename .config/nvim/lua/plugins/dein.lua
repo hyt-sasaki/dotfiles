@@ -27,6 +27,8 @@ local repositories = {
     'itchyny/lightline.vim',
     'nanotech/jellybeans.vim',
     'j-hui/fidget.nvim',
+    'kevinhwang91/nvim-bqf',
+    'lambdalisue/gin.vim',
 }
 
 for _, repo in pairs(repositories) do
