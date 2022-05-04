@@ -28,4 +28,11 @@ vim.call('ddc#custom#patch_global', 'sourceParams', {
         }
     }
 })
+
+local function t(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+vim.keymap.set('i', '<Tab>', function() return t'<C-N>' end, { silent = true, expr = true })
+vim.keymap.set('i', '<S-Tab>', function() return t'<C-P>' end, { expr = true })
 vim.call('ddc#enable')
