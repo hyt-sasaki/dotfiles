@@ -49,6 +49,12 @@ repo = 'Shougo/ddu-source-file_rec'
 [[plugins]]
 repo = 'Shougo/ddu-source-buffer'
 
+[[plugins]]
+repo = 'kuuote/ddu-source-mr'
+
+[[plugins]]
+repo = 'matsui54/ddu-source-command_history'
+
 # ddu-filter
 [[plugins]]
 repo = 'Shougo/ddu-filter-matcher_substring'
@@ -60,6 +66,9 @@ repo = 'Shougo/ddu-kind-file'
 # functionality
 [[plugins]]
 repo = 'rhysd/clever-f.vim'
+
+[[plugins]]
+repo = 'lambdalisue/mr.vim'
 
 # theme
 [[plugins]]
