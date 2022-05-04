@@ -28,6 +28,10 @@ local on_attach = function(_, bufnr)
     for _, keymap in pairs(keymaps) do
         buf_set_keymap(keymap.type, keymap.key, keymap.cmd_str, opts)
     end
+
+    vim.api.nvim_create_autocmd('BufWritePre', {
+        callback = function() return vim.lsp.buf.format() end
+    })
 end
 
 local servers = require('nvim-lsp-installer.servers')
