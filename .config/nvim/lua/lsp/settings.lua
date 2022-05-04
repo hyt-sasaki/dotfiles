@@ -16,7 +16,7 @@ local on_attach = function(_, bufnr)
         {type='n', key='<space>e', cmd_str=get_cmd_str('diagnostic.show_line_diagnostics')},
         {type='n', key='[d', cmd_str=get_cmd_str('diagnostic.goto_prev')},
         {type='n', key=']d', cmd_str=get_cmd_str('diagnostic.goto_next')},
-        {type='n', key='<space>q', cmd_str=get_cmd_str('diagnostic.set_loclist')},
+        {type='n', key='<space>q', cmd_str=get_cmd_str('diagnostic.setloclist')},
         {type='n', key='<space>F', cmd_str=get_cmd_str('buf.format')},
     }
 
