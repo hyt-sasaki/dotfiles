@@ -49,6 +49,25 @@ require('packer').startup(function(use)
     -- others
     use 'rhysd/clever-f.vim'
     use {
+        'phaazon/hop.nvim',
+        branch = 'v1', -- optional but strongly recommended
+        config = function()
+            -- you can configure Hop the way you like here; see :h hop-config
+            require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+            -- place this in one of your configuration file(s)
+            vim.api.nvim_set_keymap('n', ',f', ":lua require'hop'.hint_char1()<cr>", {})
+        end
+    }
+    use 'tpope/vim-repeat'
+    use 'andymass/vim-matchup'
+    use 'michaeljsmith/vim-indent-object'
+    use 'windwp/nvim-autopairs'
+    use 'machakann/vim-sandwich'
+    use 'windwp/nvim-ts-autotag'
+    use 'justinmk/vim-ipmotion'
+    use 'terryma/vim-expand-region'
+    use 'alvan/vim-closetag'
+    use {
         'matsui54/denops-popup-preview.vim',
         config = function()
             vim.fn['popup_preview#enable']()
@@ -63,12 +82,22 @@ require('packer').startup(function(use)
     }
     use 'j-hui/fidget.nvim'
     use 'lambdalisue/gin.vim'
+    use { 'airblade/vim-gitgutter',
+        config = function()
+            vim.cmd([[autocmd! gitgutter CursorHold,CursorHoldI]])
+            vim.cmd([[autocmd BufWritePost * GitGutter]])
+        end
+    }
     use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
     use { 'junegunn/fzf', run = function()
         vim.fn['fzf#install']()
     end
     }
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
+    -- languages
+    use 'jjo/vim-cue'
+    use 'hashivim/vim-terraform'
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

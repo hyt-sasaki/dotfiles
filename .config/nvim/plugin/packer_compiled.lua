@@ -69,11 +69,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["clever-f.vim"] = {
-    loaded = true,
-    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/clever-f.vim",
-    url = "https://github.com/rhysd/clever-f.vim"
-  },
   ["ddc-around"] = {
     loaded = true,
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/ddc-around",
@@ -186,6 +181,12 @@ _G.packer_plugins = {
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/gin.vim",
     url = "https://github.com/lambdalisue/gin.vim"
   },
+  ["hop.nvim"] = {
+    config = { "\27LJ\2\nµ\1\0\0\6\0\n\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\0016\0\4\0009\0\5\0009\0\6\0'\2\a\0'\3\b\0'\4\t\0004\5\0\0B\0\5\1K\0\1\0':lua require'hop'.hint_char1()<cr>\a,f\6n\20nvim_set_keymap\bapi\bvim\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0" },
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/hop.nvim",
+    url = "https://github.com/phaazon/hop.nvim"
+  },
   ["jellybeans.vim"] = {
     loaded = true,
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/jellybeans.vim",
@@ -201,6 +202,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/mr.vim",
     url = "https://github.com/lambdalisue/mr.vim"
+  },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-bqf"] = {
     loaded = false,
@@ -224,26 +230,85 @@ _G.packer_plugins = {
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-ts-autotag"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
+    url = "https://github.com/windwp/nvim-ts-autotag"
+  },
   ["pum.vim"] = {
     loaded = true,
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/pum.vim",
     url = "https://github.com/Shougo/pum.vim"
+  },
+  ["vim-closetag"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/vim-closetag",
+    url = "https://github.com/alvan/vim-closetag"
+  },
+  ["vim-cue"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/vim-cue",
+    url = "https://github.com/jjo/vim-cue"
+  },
+  ["vim-expand-region"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/vim-expand-region",
+    url = "https://github.com/terryma/vim-expand-region"
+  },
+  ["vim-gitgutter"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/vim-gitgutter",
+    url = "https://github.com/airblade/vim-gitgutter"
+  },
+  ["vim-indent-object"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/vim-indent-object",
+    url = "https://github.com/michaeljsmith/vim-indent-object"
+  },
+  ["vim-ipmotion"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/vim-ipmotion",
+    url = "https://github.com/justinmk/vim-ipmotion"
+  },
+  ["vim-matchup"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/vim-matchup",
+    url = "https://github.com/andymass/vim-matchup"
+  },
+  ["vim-repeat"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/vim-repeat",
+    url = "https://github.com/tpope/vim-repeat"
+  },
+  ["vim-sandwich"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/vim-sandwich",
+    url = "https://github.com/machakann/vim-sandwich"
+  },
+  ["vim-terraform"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/vim-terraform",
+    url = "https://github.com/hashivim/vim-terraform"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: denops-signature_help
-time([[Config for denops-signature_help]], true)
-try_loadstring("\27LJ\2\n|\0\0\4\0\6\0\v6\0\0\0009\0\1\0009\0\2\0B\0\1\0016\0\0\0009\0\3\0009\0\4\0'\2\5\0)\3\0\0B\0\3\1K\0\1\0\31lsp_signature_help_enabled\17nvim_set_var\bapi\26signature_help#enable\afn\bvim\0", "config", "denops-signature_help")
-time([[Config for denops-signature_help]], false)
--- Config for: lightline.vim
-time([[Config for lightline.vim]], true)
-try_loadstring("\27LJ\2\nX\0\0\4\0\5\0\a6\0\0\0009\0\1\0009\0\2\0'\2\3\0005\3\4\0B\0\3\1K\0\1\0\1\0\1\16colorscheme\vwombat\14lightline\17nvim_set_var\bapi\bvim\0", "config", "lightline.vim")
-time([[Config for lightline.vim]], false)
 -- Config for: denops-popup-preview.vim
 time([[Config for denops-popup-preview.vim]], true)
 try_loadstring("\27LJ\2\n7\0\0\2\0\3\0\0056\0\0\0009\0\1\0009\0\2\0B\0\1\1K\0\1\0\25popup_preview#enable\afn\bvim\0", "config", "denops-popup-preview.vim")
 time([[Config for denops-popup-preview.vim]], false)
+-- Config for: lightline.vim
+time([[Config for lightline.vim]], true)
+try_loadstring("\27LJ\2\nX\0\0\4\0\5\0\a6\0\0\0009\0\1\0009\0\2\0'\2\3\0005\3\4\0B\0\3\1K\0\1\0\1\0\1\16colorscheme\vwombat\14lightline\17nvim_set_var\bapi\bvim\0", "config", "lightline.vim")
+time([[Config for lightline.vim]], false)
+-- Config for: hop.nvim
+time([[Config for hop.nvim]], true)
+try_loadstring("\27LJ\2\nµ\1\0\0\6\0\n\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\0016\0\4\0009\0\5\0009\0\6\0'\2\a\0'\3\b\0'\4\t\0004\5\0\0B\0\5\1K\0\1\0':lua require'hop'.hint_char1()<cr>\a,f\6n\20nvim_set_keymap\bapi\bvim\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop.nvim")
+time([[Config for hop.nvim]], false)
+-- Config for: denops-signature_help
+time([[Config for denops-signature_help]], true)
+try_loadstring("\27LJ\2\n|\0\0\4\0\6\0\v6\0\0\0009\0\1\0009\0\2\0B\0\1\0016\0\0\0009\0\3\0009\0\4\0'\2\5\0)\3\0\0B\0\3\1K\0\1\0\31lsp_signature_help_enabled\17nvim_set_var\bapi\26signature_help#enable\afn\bvim\0", "config", "denops-signature_help")
+time([[Config for denops-signature_help]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
