@@ -30,8 +30,10 @@ local on_attach = function(_, bufnr)
     end
 
     vim.api.nvim_create_autocmd('BufWritePre', {
+        pattern = 'abuf',
         callback = function() return vim.lsp.buf.format() end
     })
+
     require 'fidget'.setup({})
 end
 
