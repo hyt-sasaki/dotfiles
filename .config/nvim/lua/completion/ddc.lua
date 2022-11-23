@@ -1,3 +1,5 @@
+vim.call('ddc#custom#patch_global', 'ui', 'native')
+
 vim.call('ddc#custom#patch_global', 'sources', {'around', 'nvim-lsp', 'tabnine'})
 
 vim.call('ddc#custom#patch_global', 'sourceOptions', {

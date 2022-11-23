@@ -9,23 +9,26 @@ vim.api.nvim_command('packadd packer.nvim')
 
 local no_errors, error_msg = pcall(function()
 
-  local time
-  local profile_info
-  local should_profile = false
-  if should_profile then
-    local hrtime = vim.loop.hrtime
-    profile_info = {}
-    time = function(chunk, start)
-      if start then
-        profile_info[chunk] = hrtime()
-      else
-        profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
-      end
+_G._packer = _G._packer or {}
+_G._packer.inside_compile = true
+
+local time
+local profile_info
+local should_profile = false
+if should_profile then
+  local hrtime = vim.loop.hrtime
+  profile_info = {}
+  time = function(chunk, start)
+    if start then
+      profile_info[chunk] = hrtime()
+    else
+      profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
     end
-  else
-    time = function(chunk, start) end
   end
-  
+else
+  time = function(chunk, start) end
+end
+
 local function save_profiles(threshold)
   local sorted_times = {}
   for chunk_name, time_taken in pairs(profile_info) do
@@ -38,8 +41,10 @@ local function save_profiles(threshold)
       results[i] = elem[1] .. ' took ' .. elem[2] .. 'ms'
     end
   end
+  if threshold then
+    table.insert(results, '(Only showing plugins that took longer than ' .. threshold .. ' ms ' .. 'to load)')
+  end
 
-  _G._packer = _G._packer or {}
   _G._packer.profile_output = results
 end
 
@@ -69,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["clever-f.vim"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/clever-f.vim",
+    url = "https://github.com/rhysd/clever-f.vim"
+  },
   ["ddc-around"] = {
     loaded = true,
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/ddc-around",
@@ -94,6 +104,11 @@ _G.packer_plugins = {
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/ddc-tabnine",
     url = "https://github.com/LumaKernel/ddc-tabnine"
   },
+  ["ddc-ui-native"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/ddc-ui-native",
+    url = "https://github.com/Shougo/ddc-ui-native"
+  },
   ["ddc.vim"] = {
     loaded = true,
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/ddc.vim",
@@ -118,6 +133,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/ddu-source-command_history",
     url = "https://github.com/matsui54/ddu-source-command_history"
+  },
+  ["ddu-source-file"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/ddu-source-file",
+    url = "https://github.com/Shougo/ddu-source-file"
   },
   ["ddu-source-file_rec"] = {
     loaded = true,
@@ -255,11 +275,6 @@ _G.packer_plugins = {
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/vim-expand-region",
     url = "https://github.com/terryma/vim-expand-region"
   },
-  ["vim-gitgutter"] = {
-    loaded = true,
-    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/vim-gitgutter",
-    url = "https://github.com/airblade/vim-gitgutter"
-  },
   ["vim-indent-object"] = {
     loaded = true,
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/vim-indent-object",
@@ -293,14 +308,6 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: denops-popup-preview.vim
-time([[Config for denops-popup-preview.vim]], true)
-try_loadstring("\27LJ\2\n7\0\0\2\0\3\0\0056\0\0\0009\0\1\0009\0\2\0B\0\1\1K\0\1\0\25popup_preview#enable\afn\bvim\0", "config", "denops-popup-preview.vim")
-time([[Config for denops-popup-preview.vim]], false)
--- Config for: lightline.vim
-time([[Config for lightline.vim]], true)
-try_loadstring("\27LJ\2\nX\0\0\4\0\5\0\a6\0\0\0009\0\1\0009\0\2\0'\2\3\0005\3\4\0B\0\3\1K\0\1\0\1\0\1\16colorscheme\vwombat\14lightline\17nvim_set_var\bapi\bvim\0", "config", "lightline.vim")
-time([[Config for lightline.vim]], false)
 -- Config for: hop.nvim
 time([[Config for hop.nvim]], true)
 try_loadstring("\27LJ\2\nµ\1\0\0\6\0\n\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\0016\0\4\0009\0\5\0009\0\6\0'\2\a\0'\3\b\0'\4\t\0004\5\0\0B\0\5\1K\0\1\0':lua require'hop'.hint_char1()<cr>\a,f\6n\20nvim_set_keymap\bapi\bvim\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop.nvim")
@@ -309,6 +316,14 @@ time([[Config for hop.nvim]], false)
 time([[Config for denops-signature_help]], true)
 try_loadstring("\27LJ\2\n|\0\0\4\0\6\0\v6\0\0\0009\0\1\0009\0\2\0B\0\1\0016\0\0\0009\0\3\0009\0\4\0'\2\5\0)\3\0\0B\0\3\1K\0\1\0\31lsp_signature_help_enabled\17nvim_set_var\bapi\26signature_help#enable\afn\bvim\0", "config", "denops-signature_help")
 time([[Config for denops-signature_help]], false)
+-- Config for: denops-popup-preview.vim
+time([[Config for denops-popup-preview.vim]], true)
+try_loadstring("\27LJ\2\n7\0\0\2\0\3\0\0056\0\0\0009\0\1\0009\0\2\0B\0\1\1K\0\1\0\25popup_preview#enable\afn\bvim\0", "config", "denops-popup-preview.vim")
+time([[Config for denops-popup-preview.vim]], false)
+-- Config for: lightline.vim
+time([[Config for lightline.vim]], true)
+try_loadstring("\27LJ\2\nX\0\0\4\0\5\0\a6\0\0\0009\0\1\0009\0\2\0'\2\3\0005\3\4\0B\0\3\1K\0\1\0\1\0\1\16colorscheme\vwombat\14lightline\17nvim_set_var\bapi\bvim\0", "config", "lightline.vim")
+time([[Config for lightline.vim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
@@ -316,6 +331,13 @@ time([[Defining lazy-load filetype autocommands]], true)
 vim.cmd [[au FileType qf ++once lua require("packer.load")({'nvim-bqf'}, { ft = "qf" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
+
+_G._packer.inside_compile = false
+if _G._packer.needs_bufread == true then
+  vim.cmd("doautocmd BufRead")
+end
+_G._packer.needs_bufread = false
+
 if should_profile then save_profiles() end
 
 end)

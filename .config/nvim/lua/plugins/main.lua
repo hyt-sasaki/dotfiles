@@ -19,6 +19,7 @@ require('packer').startup(function(use)
 
     -- ddc
     use 'Shougo/ddc.vim'
+    use 'Shougo/ddc-ui-native'
     use 'Shougo/ddc-around'
     use 'Shougo/ddc-matcher_head'
     use 'Shougo/ddc-sorter_rank'
@@ -83,12 +84,6 @@ require('packer').startup(function(use)
     }
     use 'j-hui/fidget.nvim'
     use 'lambdalisue/gin.vim'
-    use { 'airblade/vim-gitgutter',
-        config = function()
-            vim.cmd([[autocmd! gitgutter CursorHold,CursorHoldI]])
-            vim.cmd([[autocmd BufWritePost * GitGutter]])
-        end
-    }
     use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
     use { 'junegunn/fzf', run = function()
         vim.fn['fzf#install']()
