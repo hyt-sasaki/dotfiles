@@ -29,6 +29,7 @@ require('packer').startup(function(use)
     use 'Shougo/ddu.vim'
     use 'Shougo/ddu-ui-ff'
     use 'Shougo/ddu-source-file_rec'
+    use 'Shougo/ddu-source-file'
     use 'Shougo/ddu-source-buffer'
     use 'Shougo/ddu-source-line'
     use 'kuuote/ddu-source-mr'

@@ -38,10 +38,11 @@ call('ddu#custom#patch_global', {
 -- keymap
 local start_mappings = {
     { key = '<Space>f', funcArgs = { sources = { { name = 'file_rec' } } } },
+    { key = '<Space>c', funcArgs = { sources = { { name = 'file' } } } },
     { key = '<Space>b', funcArgs = { sources = { { name = 'buffer' } } } },
     { key = '<Space>r', funcArgs = { sources = { { name = 'mr' } } } },
     { key = '<Space>l', funcArgs = { sources = { { name = 'line' } } } },
-    { key = '<Space>c', funcArgs = { sources = { { name = 'command_history' } } } },
+    { key = '<Space>h', funcArgs = { sources = { { name = 'command_history' } } } },
     { key = '<Space>g', funcArgs = {
         volatile = true,
         sources = { { name = 'rg', options = { matchers = {} } } },
