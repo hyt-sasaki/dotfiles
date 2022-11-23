@@ -1,11 +1,24 @@
 local fn = vim.fn
+local api = vim.api
+
+-- Automatically install packer
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local packer_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
     packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+    vim.cmd [[packadd packer.nvim]]
 end
 
-vim.cmd [[packadd packer.nvim]]
+
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
+api.nvim_create_autocmd('BufWritePost', {
+    pattern = vim.fn.stdpath('config') .. '/lua/plugins/main.lua',
+    group = api.nvim_create_augroup('packer_user_config_augroup', { clear = true }),
+    callback = function()
+        vim.cmd [[source <afile> | PackerSync]]
+    end
+})
+
 
 require('packer').startup(function(use)
     -- lsp
@@ -101,10 +114,3 @@ require('packer').startup(function(use)
         require('packer').sync()
     end
 end)
-
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost pakcer.lua source <afile> | PackerCompile
-  augroup end
-]])
