@@ -114,6 +114,11 @@ _G.packer_plugins = {
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/ddc.vim",
     url = "https://github.com/Shougo/ddc.vim"
   },
+  ["ddu-column-filename"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/ddu-column-filename",
+    url = "https://github.com/Shougo/ddu-column-filename"
+  },
   ["ddu-filter-matcher_substring"] = {
     loaded = true,
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/ddu-filter-matcher_substring",
@@ -163,6 +168,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/ddu-ui-ff",
     url = "https://github.com/Shougo/ddu-ui-ff"
+  },
+  ["ddu-ui-filer"] = {
+    loaded = true,
+    path = "/home/sasaki/.local/share/nvim/site/pack/packer/start/ddu-ui-filer",
+    url = "https://github.com/Shougo/ddu-ui-filer"
   },
   ["ddu.vim"] = {
     loaded = true,
@@ -308,6 +318,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: lightline.vim
+time([[Config for lightline.vim]], true)
+try_loadstring("\27LJ\2\nX\0\0\4\0\5\0\a6\0\0\0009\0\1\0009\0\2\0'\2\3\0005\3\4\0B\0\3\1K\0\1\0\1\0\1\16colorscheme\vwombat\14lightline\17nvim_set_var\bapi\bvim\0", "config", "lightline.vim")
+time([[Config for lightline.vim]], false)
 -- Config for: hop.nvim
 time([[Config for hop.nvim]], true)
 try_loadstring("\27LJ\2\nµ\1\0\0\6\0\n\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\0016\0\4\0009\0\5\0009\0\6\0'\2\a\0'\3\b\0'\4\t\0004\5\0\0B\0\5\1K\0\1\0':lua require'hop'.hint_char1()<cr>\a,f\6n\20nvim_set_keymap\bapi\bvim\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop.nvim")
@@ -320,10 +334,6 @@ time([[Config for denops-signature_help]], false)
 time([[Config for denops-popup-preview.vim]], true)
 try_loadstring("\27LJ\2\n7\0\0\2\0\3\0\0056\0\0\0009\0\1\0009\0\2\0B\0\1\1K\0\1\0\25popup_preview#enable\afn\bvim\0", "config", "denops-popup-preview.vim")
 time([[Config for denops-popup-preview.vim]], false)
--- Config for: lightline.vim
-time([[Config for lightline.vim]], true)
-try_loadstring("\27LJ\2\nX\0\0\4\0\5\0\a6\0\0\0009\0\1\0009\0\2\0'\2\3\0005\3\4\0B\0\3\1K\0\1\0\1\0\1\16colorscheme\vwombat\14lightline\17nvim_set_var\bapi\bvim\0", "config", "lightline.vim")
-time([[Config for lightline.vim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads

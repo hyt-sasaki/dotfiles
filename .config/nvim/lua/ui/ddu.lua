@@ -35,6 +35,31 @@ call('ddu#custom#patch_global', {
     }
 })
 
+call('ddu#custom#patch_local', 'filer', {
+    ui = 'filer',
+    sources = { {
+        name = 'file',
+        params = {},
+    } },
+    sourceOptions = {
+        ['_'] = {
+            columns = { 'filename' },
+        }
+    },
+    kindOptions = {
+        file = {
+            defaultAction = 'open',
+        },
+    },
+    uiParams = {
+        filer = {
+            winWidth = 40,
+            split = 'vertical',
+            splitDirection = 'topleft',
+        }
+    },
+})
+
 -- keymap
 local start_mappings = {
     { key = '<Space>f', funcArgs = { sources = { { name = 'file_rec' } } } },
@@ -87,3 +112,41 @@ api.nvim_create_autocmd('FileType', {
         api.nvim_buf_set_keymap(0, 'n', '<ESC>', ':close<CR>', { silent = true, noremap = true })
     end
 })
+
+-- ddu-filer
+api.nvim_create_autocmd('FileType', {
+    pattern = 'ddu-filer',
+    callback = function()
+        for _, key in pairs({ '<CR>', '<Space>' }) do
+            api.nvim_buf_set_keymap(0, 'n', key, '', {
+                silent = true,
+                noremap = true,
+                callback = function()
+                    if call('ddu#ui#filer#is_tree') then
+                        call('ddu#ui#filer#do_action', 'expandItem', { mode = 'toggle' })
+                    else
+                        call('ddu#ui#filer#do_action', 'itemAction', { name = 'open' })
+                    end
+                end
+            })
+        end
+        for _, key in pairs({ '<Esc>', 'q' }) do
+            api.nvim_buf_set_keymap(0, 'n', key, '', {
+                silent = true,
+                noremap = true,
+                callback = function() call('ddu#ui#filer#do_action', 'quit') end
+            })
+        end
+    end
+})
+
+vim.keymap.set('n', ';d', function()
+    call('ddu#start', {
+        name = 'filer',
+        uiParams = {
+            filer = {
+                search = vim.fn.expand('%:p')
+            }
+        }
+    })
+end, { silent = true })

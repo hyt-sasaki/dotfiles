@@ -10,9 +10,9 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
+-- Autocommand that reloads neovim whenever you save this file
 api.nvim_create_autocmd('BufWritePost', {
-    pattern = vim.fn.stdpath('config') .. '/lua/plugins/main.lua',
+    pattern = '*/nvim/lua/plugins/main.lua',
     group = api.nvim_create_augroup('packer_user_config_augroup', { clear = true }),
     callback = function()
         vim.cmd [[source <afile> | PackerSync]]
@@ -42,6 +42,8 @@ require('packer').startup(function(use)
     -- ddu
     use 'Shougo/ddu.vim'
     use 'Shougo/ddu-ui-ff'
+    use 'Shougo/ddu-ui-filer'
+    use 'Shougo/ddu-column-filename'
     use 'Shougo/ddu-source-file_rec'
     use 'Shougo/ddu-source-file'
     use 'Shougo/ddu-source-buffer'
