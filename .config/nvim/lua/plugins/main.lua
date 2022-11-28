@@ -9,6 +9,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
     vim.cmd [[packadd packer.nvim]]
 end
 
+-- Automatically install Deno
+local is_deno_installed = fn.system({ 'sh', '-c', 'which deno > /dev/null; echo $?' })
+if is_deno_installed == "1" then
+    fn.system({ 'brew', 'install', 'deno' })
+end
+
 
 -- Autocommand that reloads neovim whenever you save this file
 api.nvim_create_autocmd('BufWritePost', {
