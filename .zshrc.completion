@@ -1,0 +1,55 @@
+#入力途中の履歴補完
+bindkey "^P" reverse-menu-complete
+bindkey "^N" menu-complete
+bindkey "^R" history-incremental-search-backward
+
+export PATH=$HOME/.local/bin:$PATH
+if [ ! -x "`which peco`" ]; then
+    case ${OSTYPE} in
+        darwin*)
+            brew install peco
+            ;;
+        linux*)
+            PECO_VERSION="v0.5.2"
+            NAME="peco_linux_amd64"
+            DIR="/tmp/${NAME}"
+            FILE="${DIR}.tar.gz"
+            curl -L -o $FILE "https://github.com/peco/peco/releases/download/${PECO_VERSION}/peco_linux_amd64.tar.gz"
+            tar -zxvf $FILE -C /tmp
+            if [ ! -e $HOME/.local/bin ]; then
+                mkdir -p $HOME/.local/bin
+            fi
+            chmod +x $DIR/peco
+            mv $DIR/peco $HOME/.local/bin
+            rm -r $DIR
+            rm $FILE
+            ;;
+    esac
+fi
+peco-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else tac="tail -r"
+    fi
+    BUFFER=$(fc -l -n 1 | eval $tac | peco --query "$LBUFFER")
+    CURSOR=${#BUFFER}
+    zle reset-prompt
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+autoload -Uz add-zsh-hock
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+if [ ! -e "$HOME/.zsh/anyframe" ]; then
+    mkdir -p $HOME/.zsh
+    git clone https://github.com/mollifier/anyframe.git $HOME/.zsh/anyframe
+fi
+fpath=($HOME/.zsh/anyframe(N-/) $fpath)
+autoload -Uz anyframe-init
+anyframe-init
+bindkey '^f' anyframe-widget-cdr
+
+autoload -U compinit
+compinit -C

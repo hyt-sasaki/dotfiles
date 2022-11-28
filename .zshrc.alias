@@ -1,0 +1,25 @@
+alias ll="ls -l"
+alias la="ls -a"
+alias dps='docker ps --format "{{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Command}}\t{{.RunningFor}}"'
+alias de='docker exec -it `dps | peco | cut -f 1` /bin/bash'
+
+VISUAL=""
+if [ -x "`which nvim`" ]; then
+    alias vim='nvim'
+    VISUAL=nvim
+else
+    VISUAL=vim
+fi
+export VISUAL="$VISUAL"
+export EDITOR="$VISUAL"
+case ${OSTYPE} in
+    darwin*)
+        if [ ! -x "`which gls`" ]; then
+            brew install coreutils
+        fi
+        alias ls="gls --color"
+        ;;
+    linux*)
+        alias ls="ls --color=auto"
+        ;;
+esac

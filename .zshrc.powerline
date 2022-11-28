@@ -1,0 +1,45 @@
+# powerlineの設定
+function powerline_precmd() {
+    PS1="$(powerline-shell --shell zsh $?)"
+}
+
+function install_powerline_precmd() {
+  for s in "${precmd_functions[@]}"; do
+    if [ "$s" = "powerline_precmd" ]; then
+      return
+    fi
+  done
+  precmd_functions+=(powerline_precmd)
+}
+
+if [ "$TERM" != "linux" ]; then
+    if [ ! -x "`which powerline-shell`" ]; then
+        if [ -x "`which pip`" ]; then
+            pip install --user powerline-shell
+            install_powerline_precmd
+        elif [ -x "`which pip2`" ]; then
+            pip2 install --user powerline-shell
+            install_powerline_precmd
+        elif [ -x "`which pip3`" ]; then
+            pip3 install --user powerline-shell
+            install_powerline_precmd
+        else
+            echo "pip is not installed."
+        fi
+    else
+        install_powerline_precmd
+    fi
+fi
+
+function zle-line-init zle-keymap-select {
+    L_SEPARATOR=$'\uE0B0'
+    VIM_NORMAL="%K{208}%F{black}${L_SEPARATOR}%k%f%K{208}%F{white} % NORMAL %k%f%K{black}%F{208}${L_SEPARATOR}%k%f"
+    VIM_INSERT="%K{075}%F{black}${L_SEPARATOR}%k%f%K{075}%F{white} % INSERT %k%f%K{black}%F{075}${L_SEPARATOR}%k%f"
+    RPS1="${${KEYMAP/vicmd/$VIM_NORMAL}/(main|viins)/$VIM_INSERT}"
+    RPS2=$RPS1
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+setopt transient_rprompt
