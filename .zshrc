@@ -1,5 +1,6 @@
 DOT_DIRS=$HOME/dotfiles
 
+source $DOT_DIRS/.zshrc.install
 source $DOT_DIRS/.zshrc.options
 source $DOT_DIRS/.zshrc.completion
 source $DOT_DIRS/.zshrc.alias
