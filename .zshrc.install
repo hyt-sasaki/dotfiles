@@ -1,5 +1,0 @@
-brew_path="/home/linuxbrew/.linuxbrew/bin/brew"
-if [ ! -e $brew_path ]; then
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-eval "$($brew_path shellenv)"
