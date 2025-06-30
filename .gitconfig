@@ -1,0 +1,23 @@
+[user]
+	email = h.sasaki.ynu@gmail.com
+	name = Hayato Sasaki
+[color]
+	ui = auto
+[core]
+    pager = less -F -X
+[alias]
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+
+[push]
+	default = simple
+[commit]
+	template = ~/.gitmessage.txt
+[credential]
+	helper = cache --timeout=3600
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

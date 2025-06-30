@@ -1,0 +1,16 @@
+[tools]
+aqua = "2.48.1"
+duckdb = "latest"
+fzf = "latest"
+gcloud = "528.0.0"
+gh = "latest"
+neovim = "latest"
+node = "latest"
+"npm:@anthropic-ai/claude-code" = "latest"
+"npm:@google/gemini-cli" = "latest"
+"npm:degit" = "latest"
+ripgrep = "latest"
+tmux = "latest"
+"ubi:dagger/container-use" = { version = "latest", exe = "cu" }
+usage = "latest"
+uv = "latest"
