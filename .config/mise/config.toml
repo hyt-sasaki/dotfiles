@@ -1,6 +1,7 @@
 [tools]
 aqua = "2.48.1"
 duckdb = "latest"
+fd = "latest"
 fzf = "latest"
 gcloud = "528.0.0"
 gh = "latest"
@@ -13,4 +14,7 @@ ripgrep = "latest"
 tmux = "latest"
 "ubi:dagger/container-use" = { version = "latest", exe = "cu" }
 usage = "latest"
-uv = "latest"
+uv = "0.7.19"
+
+[settings]
+idiomatic_version_file_enable_tools = ["python"]

@@ -379,21 +379,6 @@ return {
           winblend = 0,           -- ウィンドウの透明度
         },
       })
-
-      -- ターミナルを開く関数を定義
-      function _G.set_terminal_keymaps()
-        -- ターミナルモードでのキーマッピング
-        -- Escキーでノーマルモードに戻る
-        vim.api.nvim_buf_set_keymap(0, 't', '<Esc>', "[[<C-\\><C-n>]]", { noremap = true })
-        -- Ctrl + h/j/k/l でウィンドウを移動
-        vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', "[[<C-\\><C-n><C-w>h]]", { noremap = true })
-        vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', "[[<C-\\><C-n><C-w>j]]", { noremap = true })
-        vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', "[[<C-\\><C-n><C-w>k]]", { noremap = true })
-        vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', "[[<C-\\><C-n><C-w>l]]", { noremap = true })
-      end
-
-      -- ターミナルを開くたびにキーマップを設定
-      vim.cmd('autocmd TermOpen * lua set_terminal_keymaps()')
     end,
   },
 
@@ -444,5 +429,32 @@ return {
         },
       })
     end,
-  }
+  },
+  -- surround
+  {
+    "kylechui/nvim-surround",
+    version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
+  -- venv-selector.nvim (Python仮想環境の選択)
+  {
+    "linux-cultist/venv-selector.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python", --optional
+      { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+    },
+    branch = "regexp", -- This is the regexp branch, use this for the new version
+    keys = {
+      { ",v", "<cmd>VenvSelect<cr>" },
+    },
+    opts = {
+      -- Your settings go here
+    },
+  },
 }

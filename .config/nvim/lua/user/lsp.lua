@@ -5,7 +5,7 @@ local M = {}
 function M.setup()
   -- LSPのキーマップを定義
   local on_attach = function(client, bufnr)
-    local opts = { buffer = bufnr, noremap = true, silent = true }
+    local opts = { buffer = bufnr, noremap = true, silent = false }
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -22,7 +22,7 @@ function M.setup()
   require('mason').setup()
 
   -- インストールするLSPサーバーのリスト
-  local servers = { 'lua_ls', 'pyright', 'ts_ls' }
+  local servers = { 'lua_ls', 'pyright', 'ruff', 'ts_ls', 'terraformls' }
 
   -- mason-lspconfigをセットアップし、サーバーがインストールされていることを確認
   require('mason-lspconfig').setup({
