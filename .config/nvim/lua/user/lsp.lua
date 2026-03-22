@@ -47,12 +47,14 @@ function M.setup()
       },
     },
     pyright = {
+      -- pyrightconfig.json を最優先にすることでモノレポのサブプロジェクトを正しく認識する
+      -- vim.lsp.config() では root_dir 関数より root_markers がネイティブな方法
+      root_markers = { 'pyrightconfig.json', 'pyproject.toml', 'setup.py', 'setup.cfg', '.git' },
       settings = {
         python = {
           analysis = {
             typeCheckingMode = 'basic',
           },
-          pythonPath = '.venv/bin/python',
         },
       },
     },
