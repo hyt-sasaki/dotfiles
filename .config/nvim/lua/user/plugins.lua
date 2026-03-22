@@ -117,10 +117,6 @@ return {
     tag = '0.1.8',                              -- 最新の安定版タグを指定
     dependencies = { 'nvim-lua/plenary.nvim' }, -- 依存関係を明示的に指定
     keys = {
-      -- <leader>ff でファイル検索
-      { "<leader>ff", function() require("telescope.builtin").find_files() end,               desc = "Find files" },
-      -- <leader>fg でライブgrep
-      { "<leader>fg", function() require("telescope.builtin").live_grep() end,                desc = "Live Grep" },
       -- <leader>fb でバッファ検索
       { "<leader>b",  function() require("telescope.builtin").buffers() end,                  desc = "Find buffers" },
       -- <leader>fh でヘルプタグ検索
@@ -136,12 +132,51 @@ return {
     },
 
     config = function()
-      -- Telescopeのデフォルト設定（オプション）
-      require('telescope').setup({
-        defaults = {
-          -- ここにデフォルトオプションを設定
-          -- 例えば、プレビューウィンドウの表示方法など
-          -- previewer = false, -- プレビューを無効にする場合
+      require('telescope').setup({})
+    end,
+  },
+
+  -- tv.nvim (television neovim integration)
+  {
+    "alexpasmantier/tv.nvim",
+    keys = {
+      { "<leader>ff", desc = "Find files (tv)" },
+      { "<leader>fg", desc = "Find text (tv)" },
+      { "<leader>tv", desc = "TV channel selector" },
+    },
+    config = function()
+      local h = require("tv").handlers
+
+      require("tv").setup({
+        channels = {
+          -- <leader>ff でファイル検索
+          files = {
+            keybinding = "<leader>ff",
+            handlers = {
+              ["<CR>"]  = h.open_as_files,
+              ["<C-q>"] = h.send_to_quickfix,
+              ["<C-s>"] = h.open_in_split,
+              ["<C-v>"] = h.open_in_vsplit,
+              ["<C-y>"] = h.copy_to_clipboard,
+            },
+          },
+          -- <leader>fg でテキスト検索 (ripgrep)
+          text = {
+            keybinding = "<leader>fg",
+            handlers = {
+              ["<CR>"]  = h.open_at_line,
+              ["<C-q>"] = h.send_to_quickfix,
+              ["<C-s>"] = h.open_in_split,
+              ["<C-v>"] = h.open_in_vsplit,
+              ["<C-y>"] = h.copy_to_clipboard,
+            },
+          },
+        },
+        global_keybindings = {
+          channels = "<leader>tv",
+        },
+        quickfix = {
+          auto_open = true,
         },
       })
     end,
@@ -432,6 +467,22 @@ return {
       { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>",   desc = "Deny diff" },
     },
   },
+  -- which-key.nvim (キーバインドのポップアップ表示)
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      preset = "helix",
+    },
+    keys = {
+      {
+        "<leader>?",
+        function() require("which-key").show({ global = false }) end,
+        desc = "Buffer Keymaps",
+      },
+    },
+  },
+
   -- surround
   {
     "kylechui/nvim-surround",

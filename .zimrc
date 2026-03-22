@@ -57,6 +57,6 @@ zmodule zsh-users/zsh-history-substring-search
 # Fish-like autosuggestions for Zsh.
 zmodule zsh-users/zsh-autosuggestions
 
-# fzf integration
-zmodule fzf
+# fzf integration (disabled in favor of television)
+# zmodule fzf
 # }}} End configuration added by Zim install

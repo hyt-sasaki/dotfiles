@@ -155,3 +155,8 @@ source ~/.zsh/keybindings.zsh
 source ~/.zsh/mise.zsh
 # miseの初期化後に設定したいものもあるので、こちらでも再読み込み
 source ~/.zsh/post_environment.zsh
+
+# --------------------------------------------------------------------
+# 5. television shell integration (Ctrl+T: file search, Ctrl+R: history)
+# --------------------------------------------------------------------
+eval "$(tv init zsh)"
