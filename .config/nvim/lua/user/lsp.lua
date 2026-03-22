@@ -68,7 +68,7 @@ function M.setup()
       opts = vim.tbl_deep_extend('force', opts, server_opts[server_name])
     end
     -- LSPサーバーをセットアップ
-    require('lspconfig')[server_name].setup(opts)
+    vim.lsp.config(server_name, opts)
   end
 end
 
