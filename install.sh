@@ -1,4 +1,15 @@
 #!/usr/bin/env zsh
+
+# .gitconfig.local の存在チェック
+if [ ! -e $HOME/.gitconfig.local ]; then
+    echo "ERROR: ~/.gitconfig.local が見つかりません。" >&2
+    echo "以下のコマンドで作成してください:" >&2
+    echo "" >&2
+    echo "  git config --file ~/.gitconfig.local user.name \"Your Name\"" >&2
+    echo "  git config --file ~/.gitconfig.local user.email \"your@email.com\"" >&2
+    exit 1
+fi
+
 if [ ! -e $HOME/.config ]; then
     mkdir $HOME/.config
 fi

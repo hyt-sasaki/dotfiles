@@ -1,6 +1,5 @@
-[user]
-	email = h.sasaki.ynu@gmail.com
-	name = Hayato Sasaki
+[include]
+    path = ~/.gitconfig.local
 [color]
 	ui = auto
 [core]
