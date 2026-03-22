@@ -160,3 +160,8 @@ source ~/.zsh/post_environment.zsh
 # 5. television shell integration (Ctrl+T: file search, Ctrl+R: history)
 # --------------------------------------------------------------------
 eval "$(tv init zsh)"
+
+# --------------------------------------------------------------------
+# 6. マシン固有の設定（dotfiles管理外）
+# --------------------------------------------------------------------
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
