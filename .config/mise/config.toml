@@ -11,7 +11,6 @@ fd = "latest"
 fzf = "latest"
 gcloud = "556.0.0"
 gh = { version = "latest", exe = "gh" }
-"github:bizreach-inc/biz-cosense-mcp-server" = { version = "latest", asset_pattern = "biz-cosense-mcp-server" }
 "github:runmedev/runme" = "latest"
 marp-cli = "latest"
 neovim = "latest"
@@ -31,6 +30,7 @@ opa = "latest"
 poetry = "2.2.1"
 python = "3.14"
 ripgrep = "latest"
+rust = "latest"
 terragrunt = "latest"
 tmux = "latest"
 "ubi:dagger/container-use" = { version = "latest", exe = "cu" }
