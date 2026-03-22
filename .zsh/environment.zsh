@@ -1,2 +1,2 @@
-
+export EDITOR="vim"
 

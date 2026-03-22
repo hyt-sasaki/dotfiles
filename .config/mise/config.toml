@@ -1,20 +1,47 @@
 [tools]
-aqua = "2.48.1"
+aqua = "2.53.9"
+"aqua:runmedev/runme" = "latest"
+"aqua:slack.com/slack-cli" = "3.10.0"
+azure-cli = "latest"
+"cargo:vl-convert" = "latest"
+cue = "latest"
+deno = "latest"
 duckdb = "latest"
 fd = "latest"
 fzf = "latest"
-gcloud = "528.0.0"
-gh = "latest"
+gcloud = "556.0.0"
+gh = { version = "latest", exe = "gh" }
+"github:bizreach-inc/biz-cosense-mcp-server" = { version = "latest", asset_pattern = "biz-cosense-mcp-server" }
+"github:runmedev/runme" = "latest"
+marp-cli = "latest"
 neovim = "latest"
 node = "latest"
-"npm:@anthropic-ai/claude-code" = "latest"
 "npm:@google/gemini-cli" = "latest"
+"npm:@mockoon/cli" = "9.3.0"
+"npm:@openai/codex" = "latest"
+"npm:@playwright/mcp" = "latest"
+"npm:@upstash/context7-mcp" = "latest"
+"npm:agent-browser" = "latest"
 "npm:degit" = "latest"
+"npm:mermaid-cli" = "latest"
+opa = "latest"
+"pipx:cookiecutter" = "latest"
+"pipx:cruft" = "latest"
+"pipx:mkdocs" = "latest"
+poetry = "2.2.1"
+python = "3.14"
 ripgrep = "latest"
+terragrunt = "latest"
 tmux = "latest"
 "ubi:dagger/container-use" = { version = "latest", exe = "cu" }
 usage = "latest"
-uv = "0.7.19"
+uv = "0.10.10"
+yq = "latest"
+
+[env]
+# trivy: safe-chain proxy の CA 証明書バンドル（システムCA + カスタムCA）
+TRIVY_CACERT = "{{env.HOME}}/.safe-chain/certs/ca-bundle.pem"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]
+experimental = true
