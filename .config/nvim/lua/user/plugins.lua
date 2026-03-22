@@ -19,7 +19,7 @@ return {
           group_empty = true,
         },
         filters = {
-          dotfiles = true,         -- ドットファイルを表示
+          dotfiles = false,        -- ドットファイルを表示
         },
         sync_root_with_cwd = true, -- CWDと同期
         update_focused_file = {
