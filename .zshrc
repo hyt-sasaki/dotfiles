@@ -157,9 +157,10 @@ source ~/.zsh/mise.zsh
 source ~/.zsh/post_environment.zsh
 
 # --------------------------------------------------------------------
-# 5. television shell integration (Ctrl+T: file search, Ctrl+R: history)
+# 5. シェル統合 (television, zoxide)
 # --------------------------------------------------------------------
 eval "$(tv init zsh)"
+eval "$(zoxide init zsh --cmd cd)"
 
 # --------------------------------------------------------------------
 # 6. マシン固有の設定（dotfiles管理外）
