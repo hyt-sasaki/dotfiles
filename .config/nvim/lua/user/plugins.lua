@@ -122,7 +122,7 @@ return {
       -- <leader>fh でヘルプタグ検索
       { "<leader>fh", function() require("telescope.builtin").help_tags() end,                desc = "Help Tags" },
       -- <leader>fo で最近開いたファイルを検索
-      { "<leader>fo", function() require("telescope.builtin").oldfiles() end,                 desc = "Find Old Files" },
+      { "<leader>r",  function() require("telescope.builtin").oldfiles() end,                 desc = "Recent Files" },
       -- <leader>ld で現在のバッファの診断メッセージを一覧表示
       { "<leader>ld", function() require("telescope.builtin").diagnostics() end,              desc = "List Diagnostics" },
       -- <leader>lD でワークスペース全体の診断メッセージを一覧表示
