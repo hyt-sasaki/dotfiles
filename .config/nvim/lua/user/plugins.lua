@@ -506,6 +506,24 @@ return {
       })
     end
   },
+  -- telescope-zoxide (zoxideをtelescopeで検索)
+  {
+    "jvgrootveld/telescope-zoxide",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
+    keys = {
+      {
+        "<leader>zi",
+        "<cmd>Telescope zoxide list<cr>",
+        desc = "Zoxide list",
+      },
+    },
+    config = function()
+      require("telescope").load_extension("zoxide")
+    end,
+  },
+
   -- venv-selector.nvim (Python仮想環境の選択)
   {
     "linux-cultist/venv-selector.nvim",
