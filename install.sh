@@ -15,6 +15,7 @@ if [ ! -e $HOME/.config ]; then
 fi
 ln -s $HOME/dotfiles/.config/nvim $HOME/.config/nvim
 ln -s $HOME/dotfiles/.config/mise $HOME/.config/mise
+ln -s $HOME/dotfiles/.config/karabiner $HOME/.config/karabiner
 ln -s $HOME/dotfiles/.powerline-shell.json $HOME/.powerline-shell.json
 ln -s $HOME/dotfiles/.gitmessage.txt $HOME/.gitmessage.txt
 ln -s $HOME/dotfiles/.gitconfig $HOME/.gitconfig
