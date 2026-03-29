@@ -35,6 +35,8 @@ ripgrep = "latest"
 rust = "latest"
 terragrunt = "latest"
 tmux = "latest"
+"github:dolthub/dolt" = "1.84.0"
+"github:steveyegge/beads" = { version = "0.62.0", exe = "bd" }
 usage = "latest"
 uv = "0.10.10"
 yq = "latest"
