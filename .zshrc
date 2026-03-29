@@ -166,3 +166,4 @@ eval "$(zoxide init zsh)"
 # 6. マシン固有の設定（dotfiles管理外）
 # --------------------------------------------------------------------
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+source ~/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
