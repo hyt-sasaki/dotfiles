@@ -166,4 +166,10 @@ eval "$(zoxide init zsh)"
 # 6. マシン固有の設定（dotfiles管理外）
 # --------------------------------------------------------------------
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-source ~/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
+if [[ -f ~/.safe-chain/scripts/init-posix.sh ]]; then
+  source ~/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
+else
+  echo "[dotfiles] Aikido Safe-chain not found. Installing..."
+  curl -fsSL https://github.com/AikidoSec/safe-chain/releases/latest/download/install-safe-chain.sh | sh
+  [[ -f ~/.safe-chain/scripts/init-posix.sh ]] && source ~/.safe-chain/scripts/init-posix.sh
+fi
