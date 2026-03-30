@@ -1,0 +1,152 @@
+sanitise tridactyllocal tridactylsync
+fillcmdline_nofocus .tridactylrc loading...
+
+" === コマンド設定 ===
+" --- pocket ---
+command get_latest_pocket exclaim_quiet zsh -c "/usr/local/bin/pockyt get -n 1 -f '{title}' | pbcopy"
+" --- choosy ---
+command choosy composite js 'x-choosy://open/' + document.location.href | open
+" --- TST ---
+command connectTst jsb browser.runtime.connect('treestyletab@piro.sakura.ne.jp', { name: `connection from ${browser.runtime.id}` });
+command collapseCurrentTab jsb browser.runtime.connect('treestyletab@piro.sakura.ne.jp', { name: `connection from ${browser.runtime.id}` }).postMessage({ type: 'collapse-tree', tab:  'current' });
+command expandCurrentTab jsb browser.runtime.connect('treestyletab@piro.sakura.ne.jp', { name: `connection from ${browser.runtime.id}` }).postMessage({ type: 'expand-tree', tab:  'current' });
+command focusRootTab jsb browser.runtime.connect('treestyletab@piro.sakura.ne.jp', { name: `connection from ${browser.runtime.id}` }).postMessage({ type: 'focus', tab:  'root' });
+command focusParentTab jsb browser.runtime.connect('treestyletab@piro.sakura.ne.jp', { name: `connection from ${browser.runtime.id}` }).postMessage({ type: 'focus', tab:  'parent' });
+command focusLastDescendantTab jsb browser.runtime.connect('treestyletab@piro.sakura.ne.jp', { name: `connection from ${browser.runtime.id}` }).postMessage({ type: 'focus', tab:  'lastDescendant' });
+command closeTreeTabs jsb browser.runtime.sendMessage('treestyletab@piro.sakura.ne.jp', { type: 'get-tree', tab: 'current' }).then((tab) => {tab.children.forEach((child) => browser.tabs.remove(child.id)); browser.tabs.remove(tab.id)});
+command nextTree jsb browser.runtime.connect('treestyletab@piro.sakura.ne.jp', { name: `connection from ${browser.runtime.id}` }).postMessage({ type: 'focus', tab:  'nextSibling' });
+command previousTree jsb browser.runtime.connect('treestyletab@piro.sakura.ne.jp', { name: `connection from ${browser.runtime.id}` }).postMessage({ type: 'focus', tab:  'previousSibling' });
+command moveCurrentTabToEnd jsb browser.runtime.connect('treestyletab@piro.sakura.ne.jp', { name: `connection from ${browser.runtime.id}` }).postMessage({ type: 'move-to-end', tab:  'current' });
+
+alias editor_rm composite editor | jsb -p tri.native.run(`clipboard yank '${JS_ARG[1]}'; rm -f '${JS_ARG[0]}'`)
+bind --mode=insert <C-i> editor_rm
+bind --mode=input <C-i> editor_rm
+"
+" Binds
+bindurl github.com ;p composite hint -Jpipe a textContent | yank
+unbind --mode=ex <C-a>
+unbind --mode=ex <C-c>
+" Handy multiwindow/multitasking binds
+bind gd tabdetach
+bind gD composite tabduplicate | tabdetach
+bind gC choosy
+
+unbind d
+unbind u
+unbind <C-o>
+unbind <C-i>
+unbind F
+unbind ;z
+unbind zi
+unbind zo
+unbind z0
+unbind zz
+unbind ZI
+unbind ZO
+unbind ZZ
+unbind gt
+unbind gT
+bind gt nextTree
+bind gT previousTree
+bind zc collapseCurrentTab
+bind zo expandCurrentTab
+bind z0 focusParentTab
+bind z$ focusLastDescendantTab
+bind zd closeTreeTabs
+bind ZI zoom +10 true
+bind ZO zoom -10 true
+bind ZZ zoom 100
+bind E source ~/.tridactylrc
+" bind ;z hint -JcF main,section,div e => {console.debug(e); tri.excmds.zoom((window.screen.width / (e.offsetWidth * 1.1))).then( () => tri.excmds.scrollpx(e.offsetLeft - 0.05 * e.offsetWidth, 0))}
+bind ;z hint -JcF main,section,div e => {console.debug(e); tri.excmds.zoom((window.screen.width / (e.offsetWidth * 1.1))).then( () => tri.excmds.scrollpx(window.pageXOffset + e.getBoundingClientRect().left - 0.05 * e.offsetWidth, 0))}
+bind F hint -t
+bind ;f hint -Jc a
+bind ;F hint -Jtc a
+bind ;c composite hint -Jpipe a href | js -p 'x-choosy://open/' + JS_ARG | open
+bind ;C hint -JF e => {tri.excmds.fillcmdline_tmp(3000, 'selected css element type is ' + e.)}
+bind g, tab #
+bind d scrollpage
+bind u scrollpage -1
+bind 0 scrollto 0 x
+bind $ scrollto 100 x
+bind U undo tab
+bind x tabclose
+bind J tabprev
+bind K tabnext
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+bind c fillcmdline tabclose
+bind ,<Space> nohlsearch
+bind --mode=ex <C-[> ex.hide_and_clear
+bind --mode=ex <C-p> composite ex.prev_completion
+bind --mode=ex <C-n> composite ex.next_completion
+bind --mode=ex <C-c> composite ex.execute_ex_on_completion_args tabclose ex.prev_completion
+bind --mode=ex <C-d> composite ex.execute_ex_on_completion_args tabdetach
+bind --mode=browser <C-j> tabprev
+bind --mode=browser <C-k> tabnext
+bind --mode=browser <C-b> tab
+bind ,P pin
+" bind ,p composite fillcmdline_nofocus pocketに保存中... ; get_current_url | exclaim_quiet /usr/local/bin/pockyt put -i; get_latest_pocket; getclip | fillcmdline_tmp 3000 保存完了:
+bind ,, moveCurrentTabToEnd
+bind gc fillcmdline tabgroupcreate
+bind gs fillcmdline tabgroupswitch
+"
+" Misc settings
+"
+
+" set editorcmd to suckless terminal, or use the defaults on other platforms
+" js tri.browserBg.runtime.getPlatformInfo().then(os=>{const editorcmd = os.os=="linux" ? "st vim" : "auto"; tri.config.set("editorcmd", editorcmd)})
+
+" set profile dir on Windows
+" jsb browser.runtime.getPlatformInfo().then(os=>{const profiledir = os.os=="win" ? "C:\\Users\\olie\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\gwm76nmk.default" : "auto"; tri.config.set("profiledir", profiledir)})
+
+" Sane hinting mode
+set hintfiltermode vimperator-reflow
+
+" Make Tridactyl work on more sites at the expense of some security
+" set csp clobber
+fixamo_quiet
+
+
+"
+" My Options
+"
+"unset profiledir
+set profiledir /Users/hytssk/Library/Application Support/Firefox/Profiles/y9d07jsq.default-release/
+set incsearch true
+set modeindicatorshowkeys true
+set tabopencontaineraware true
+colorscheme dark
+set allowautofocus false
+set homepages ["www.google.com"]
+set searchengine google
+"set searchengine bing
+set followpagepatterns.next ^(next|newer)\\b|»|>>|more|次へ?
+set followpagepatterns.prev ^(prev|older)\\b|«|<<|less|前へ?
+set tabopenpos last
+set editorcmd osascript /Users/hytssk/Applications/TerminalVim.app 
+" set editorcmd /Applications/MacVim.app
+" set autocontain {"github.com": github, "youtube.com": google}
+seturl ^https://colab.research.google.com superignore true
+seturl ^https://notebooks.googleusercontent.com/lab/workspaces superignore true
+seturl ^https://scrapbox.io/.+/.+$ superignore true
+seturl ^https://search-lesson2201-fm7hvo7bsn42kuakf3ymeqkoxq.ap-northeast-1.es.amazonaws.com/_dashboards/app/dev_tools superignore true
+
+quickmark j https://jk.nicovideo.jp/?cmnhd_ref=device%3Dpc%26site%3Dnicojikkyo_web%26pos%3Dheader_servicelink
+
+" autocontain
+autocontain -s youtube\.com google
+
+" Black List
+blacklist add colab.research.google.com/
+
+guiset_quiet hoverlink right
+" connectToTst
+
+fillcmdline_tmp 1000 .tridactylrc has been loaded.
+"
+" URL redirects
+" This will have to do until someone writes us a nice syntax file :)
+" vim: set filetype=vim:
