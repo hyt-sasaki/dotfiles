@@ -40,6 +40,7 @@ tmux = "latest"
 usage = "latest"
 uv = "0.10.10"
 yq = "latest"
+"github:jesseduffield/lazygit" = "0.60.0"
 
 [env]
 # trivy: safe-chain proxy の CA 証明書バンドル（システムCA + カスタムCA）
